@@ -1,0 +1,5 @@
+com\ofasin\os\ebanking\business\TipProfesionIface.class
+com\ofasin\os\ebanking\business\UsersLoginIface.class
+com\ofasin\os\ebanking\business\TipEducacionIface.class
+com\ofasin\os\ebanking\business\ImagenesIface.class
+com\ofasin\os\ebanking\business\TipOcupacionIface.class
