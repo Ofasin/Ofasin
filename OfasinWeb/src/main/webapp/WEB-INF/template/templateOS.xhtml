@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <ui:param name="resources" value="http://javarevolutions.com/resources/site"/>
+            <ui:param name="pathResources" value="#{request.getContextPath()}/resources"/>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <link rel="shortcut icon" type="image/png" href="#{pathResources}/images/icono.jpg"/>
+                <title>&copy; 2017 OMNISUITE eBanking</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north">
+                    <p:panel>
+                        <table align="center">
+                            <tr>
+                                <td>
+                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_target">
+                                        <input type="hidden" name="cmd" value="_s-xclick"/>
+                                        <input type="hidden" name="hosted_button_id" value="BDBWXVDZJULMG"/>
+                                        <input type="image" src="${resources}/javarev/images/btn_donateCC_LG.gif" 
+                                               border="0" name="submit" alt="Contribuye para crear una escuela virtual."
+                                               title="Contribuye para crear una escuela virtual"/>
+                                        <img alt="Contribuye para crear una escuela virtual" border="0" 
+                                             src="${resources}/javarev/images/pixel.gif" width="1" height="1"
+                                             title="Contribuye para crear una escuela virtual"/>
+                                    </form>
+                                </td>
+                                <td>
+                                    <img border="0" src="#{resources}/javarev/images/izquierda1.gif" 
+                                         title="Contribuye, aporta con Java Revolutions" width="60"/>
+                                </td>
+                                <td>
+                                    <div style="border: 0; height: 100px; overflow: hidden; width: 248px;">
+                                        <iframe align="middle" allowtransparency="true" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="http://www.youtube.com/subscribe_widget?p=JavaRevolutions" style="left: -1px; position: relative; top: -1px;" width="250px">
+                                        </iframe>
+                                    </div>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td align="center">
+                            <h:outputLabel style="font-size: 16px; color: steelblue; font-weight: bold;"
+                                           value="Síguenos"
+                                           title="Síguenos en Twitter, Facebook y Google"/><br></br>
+                            <a href="https://twitter.com/JavaRevolutions" target="_blank">
+                                <img border="0" src="${resources}/javarev/images/twitter.jpg" title="Siguenos en Twitter"/>
+                            </a>
+                            <a href="http://facebook.com/java.revolutions.2010" target="_blank">
+                                <img border="0" src="${resources}/javarev/images/facebook.jpg" title="Siguenos en Facebook"/>
+                            </a>
+                            <a href="https://plus.google.com/117956501338698136396" target="_blank">
+                                <img border="0" src="${resources}/javarev/images/gplus.jpg" title="Siguenos en Google"/>
+                            </a>
+                            </td>
+                            </tr>
+                        </table>
+                    </p:panel>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" closable="true" collapsible="true">
+                    <div>
+                        <center style="font-size: 12px;">Todas las marcas y logotipos que aparecen en este sitio, son propiedad de sus respectivas compañías.</center>
+                        <center style="font-size: 14px;">&copy; 2017 Java Revolutions | All Rights Reserved | Canal en YouTube: <a href="http://www.youtube.com/user/JavaRevolutions" target="_blank">Java Revolutions</a></center>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" header="Opciones de Menú" collapsible="true"
+                              style="font-size: 14px;">
+                    <h:form id="menuOSeBanking">
+                        <p:menu>
+                            <p:submenu label="Soluciones eBanking">
+                                <p:menuitem value="Planet Media" ajax="false"
+                                            url="http://www.planetmedia.com.mx"
+                                            target="_blank"
+                                            style="font-weight: bold; font-size: 14px;"/>
+                                <p:menuitem value="eBanking" ajax="false"
+                                            url="http://www.planetmedia.com.mx/soluciones/omnisuite-banking"
+                                            target="_blank"
+                                            style="font-weight: bold; font-size: 14px;"/>
+                                <p:menuitem value="Payments" ajax="false"
+                                            url="http://www.planetmedia.com.mx/soluciones/omnisuite-payments"
+                                            target="_blank"
+                                            style="font-weight: bold; font-size: 14px;"/>
+                                <p:menuitem value="Cloud" ajax="false"
+                                            url="http://www.planetmedia.com.mx/nuestros-servicios/cloud"
+                                            target="_blank"
+                                            style="font-weight: bold; font-size: 14px;"/>
+                                <p:menuitem value="Gestión Empresarial" ajax="false"
+                                            url="http://www.planetmedia.com.mx/nuestros-servicios/gestion-empresarial"
+                                            target="_blank"
+                                            style="font-weight: bold; font-size: 14px;"/>
+                                <p:menuitem value="Salir" url="/index.html" style="font-weight: bold; font-size: 14px; color: red;"/>
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <ui:insert name="bodyOS">&copy; 2015 Java Revolutions OS eBanking</ui:insert>
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>

@@ -1,0 +1,47 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+     <http auto-config="true"
+          authentication-manager-ref="userITAuthenticationManager"
+          xmlns="http://www.springframework.org/schema/security">
+        
+      
+      <access-denied-handler error-page="/content/AccesoNegado.faces"/>
+        
+        <intercept-url pattern="/content/AccesoNegado.faces" access="IS_AUTHENTICATED_FULLY"/>
+        <intercept-url pattern="/content/welcome.faces" access="ROLE_USER, ROLE_ADMIN"/> 
+        <intercept-url pattern="/content/**" access="ROLE_ALUMNO, ROLE_VIP, ROLE_ADMIN"/>
+        
+        <form-login 
+            login-page="/Login.faces"
+            default-target-url="/content/Inicio.faces"
+            always-use-default-target="true"
+            authentication-failure-url="/Login.faces?error=credenciales"
+            username-parameter="formLogin:usuario"
+            password-parameter="formLogin:password"/>
+        <logout logout-url="/logout" logout-success-url="/Login.faces"/>
+    </http>
+    
+    <bean id="serviceLogin" class="com.ofasin.os.ebanking.service.ServiceLogin"/>
+    
+      <bean id="customUserAuthenticationProvider" class="com.ofasin.os.ebanking.bean.BeanLogin">
+        <property name="serviceLogin" ref="serviceLogin"/>
+    </bean>
+	
+    <authentication-manager id="userITAuthenticationManager" xmlns="http://www.springframework.org/schema/security">
+        <authentication-provider ref="customUserAuthenticationProvider"/>
+    </authentication-manager>
+    
+    <sec:global-method-security secured-annotations="enabled"/>	
+    
+     <bean id="serviceImagenes" class="com.ofasin.os.ebanking.service.ServiceImagenes"/>
+    
+</beans>

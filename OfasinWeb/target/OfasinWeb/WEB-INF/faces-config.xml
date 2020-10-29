@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+<application>
+    <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+</application>
+
+<managed-bean>
+    <managed-bean-name>dominioUserLogin</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.model.DominioUsers</managed-bean-class>
+    <managed-bean-scope>none</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+    <managed-bean-name>beanMenu</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.bean.BeanMenu</managed-bean-class>
+
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+        <property-name>user</property-name>
+        <value>#{dominioUserLogin}</value>
+    </managed-property>
+</managed-bean>
+
+<managed-bean>
+    <managed-bean-name>modelImagenes</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.model.DominioImagenes</managed-bean-class>
+    <managed-bean-scope>none</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+    <managed-bean-name>beanWelcome</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.bean.BeanWelcome</managed-bean-class>
+
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+        <property-name>imagen</property-name>
+        <value>#{modelImagenes}</value>
+    </managed-property>
+    <managed-property>
+        <property-name>service</property-name>
+        <value>#{serviceImagenes}</value>
+    </managed-property></managed-bean>
+    
+</faces-config>

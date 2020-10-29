@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+		 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+       
+        <title>Login</title>
+
+        <h:outputStylesheet library="styles" name="custom.css"/>
+    </h:head>
+    <h:body>
+    	
+    
+    	<div id="login-dialog">
+    		<h1>Login</h1>
+    		<p:growl id="growl" showDetail="true" life="3000" />
+    		<h:form id="formLogin" onkeypress="if (event.keyCode == 13) { document.getElementById('formLogin:loginButton').click(); return false; }">
+    			<p:focus for="usuario"/>
+    			<p:messages id="messages" closable="true" >
+                            <p:autoUpdate />
+                        </p:messages>
+    		
+    			<h:panelGrid columns="2" styleClass="grid-login">
+    				<p:outputLabel value="E-mail" />
+    				<p:inputText size="30" id="usuario"  />
+    				
+    				<p:outputLabel value="Senha" />
+    				<p:password size="30" id="password" />
+    				
+    				
+                                <p:commandButton type="button" value="Cancelar" onclick="window.location.reload();"/>
+    				<p:commandButton id="loginButton"  update=":growl"   
+                                             type="button" value="Aceptar" onclick="sendData();" icon="icon-login"/>
+    			</h:panelGrid>
+    		</h:form>
+    	</div>
+        <script type="text/javascript" language="JavaScript">            
+            window.onload = function carga() {
+                var error = '#{request.getParameter("error")}';
+                if(error == 'credenciales') {
+                    error = 'Usuario o Contraseña Inválidos.';
+                    alert(error);
+                    document.getElementById("errorSpan").innerHTML = error;
+                }
+            }
+            
+            function datosValidos() {
+                var usuario = document.getElementById("formLogin:usuario");
+                var password = document.getElementById("formLogin:password");
+                if (password.value == "") {
+                    if (usuario.value == "") {
+                        alert("Ingresa tu usuario y tu password");
+                        usuario.focus();
+                        return false;
+                    }
+                } else if (usuario.value == "") {
+                    alert("Ingresa tu usuario");
+                    usuario.focus();
+                    return false;
+                }
+                if (password.value == "") {
+                    alert("Ingresa tu contraseña");
+                    password.focus();
+                    return false;
+                }
+                return true;
+            }
+            
+            function sendData() {
+                if(datosValidos()) {
+                    var forma = document.getElementById("formLogin");
+                    forma.action = "j_spring_security_check";
+                    forma.method = "POST";
+                    forma.submit();
+                }
+            }
+        </script>
+    </h:body>
+    
+        
+</html>

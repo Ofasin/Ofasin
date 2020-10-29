@@ -1,0 +1,12 @@
+com\algaworks\model\Cliente.class
+com\algaworks\model\Endereco.class
+com\ofasin\os\ebanking\service\ServiceImagenes.class
+com\ofasin\os\ebanking\bean\BeanLogin.class
+com\algaworks\controller\ClientesManager.class
+com\ofasin\os\ebanking\utils\Utilidades.class
+com\hpapg\os\ebanking\globals\Global.class
+com\ofasin\os\ebanking\bean\BeanWelcome.class
+com\ofasin\os\ebanking\details\Usuario.class
+com\ofasin\os\ebanking\service\ServiceLogin.class
+com\ofasin\os\ebanking\bean\BeanMenu.class
+com\ofasin\os\ebanking\utils\ImageStreamUserLog.class
