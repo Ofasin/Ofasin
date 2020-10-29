@@ -1,0 +1,113 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.ofasin.os.ebanking.model;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+/**
+ *
+ * @author Heidelber Gonzalez Iguaran
+ */
+
+public class DominioPerfil extends DominioGeneric {
+
+    private static final long serialVersionUID = 1L;
+    
+    private Long idperfil;
+    private String descrpperfil;
+    private Date fecradica;
+    private String contratista;
+    private BigDecimal techopresp;
+    private BigDecimal monto;
+    private Date vigencia;
+    private List<DominioPerfildetll> perfildetllList;
+    private DominioLuma idluma;
+
+    public DominioPerfil() {
+    }
+
+    public DominioPerfil(Long idperfil) {
+        this.idperfil = idperfil;
+    }
+
+    public Long getIdperfil() {
+        return idperfil;
+    }
+
+    public void setIdperfil(Long idperfil) {
+        this.idperfil = idperfil;
+    }
+
+    public String getDescrpperfil() {
+        return descrpperfil;
+    }
+
+    public void setDescrpperfil(String descrpperfil) {
+        this.descrpperfil = descrpperfil;
+    }
+
+    public Date getFecradica() {
+        return fecradica;
+    }
+
+    public void setFecradica(Date fecradica) {
+        this.fecradica = fecradica;
+    }
+
+    public String getContratista() {
+        return contratista;
+    }
+
+    public void setContratista(String contratista) {
+        this.contratista = contratista;
+    }
+
+    public BigDecimal getTechopresp() {
+        return techopresp;
+    }
+
+    public void setTechopresp(BigDecimal techopresp) {
+        this.techopresp = techopresp;
+    }
+
+    public BigDecimal getMonto() {
+        return monto;
+    }
+
+    public void setMonto(BigDecimal monto) {
+        this.monto = monto;
+    }
+
+    public Date getVigencia() {
+        return vigencia;
+    }
+
+    public void setVigencia(Date vigencia) {
+        this.vigencia = vigencia;
+    }
+
+ 
+    public List<DominioPerfildetll> getPerfildetllList() {
+        return perfildetllList;
+    }
+
+    public void setPerfildetllList(List<DominioPerfildetll> perfildetllList) {
+        this.perfildetllList = perfildetllList;
+    }
+
+    public DominioLuma getIdluma() {
+        return idluma;
+    }
+
+    public void setIdluma(DominioLuma idluma) {
+        this.idluma = idluma;
+    }
+
+    
+    
+}
