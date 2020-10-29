@@ -43,5 +43,6 @@
     <sec:global-method-security secured-annotations="enabled"/>	
     
      <bean id="serviceImagenes" class="com.ofasin.os.ebanking.service.ServiceImagenes"/>
+     <bean id="serviceTipEducacion" class="com.ofasin.os.ebanking.service.ServiceTipEducacion"/>
     
 </beans>

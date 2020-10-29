@@ -1,0 +1,161 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/Layout.xhtml">
+    <ui:define name="content">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{beanTipoEducacion.llenaLista}"/>
+        </f:metadata>
+        <h1 class="aw-page-title">Perfiles Academicos</h1>
+        <h:form id="formTableTiposEducacion">
+            <p:growl id="messages" showDetail="true" showSummary="true"/>
+            <p:toolbar>
+                <p:toolbarGroup align="right">
+		    <p:commandButton value="Nuevo" icon="ui-icon-document"
+                                     actionListener="#{beanTipoEducacion.onUpdateInsertRow(null)}" 
+                        update=":formAAShowTiposEducacion:dialogTiposEducacion"
+                        title="Registrar Nuevo"
+                        oncomplete="PF('widgetTiposEducacion').show();">
+			<p:resetInput target="formAAShowTiposEducacion:dialogTiposEducacion" />
+		</p:commandButton>
+		</p:toolbarGroup>
+            </p:toolbar>
+            <p:dataTable id="tablaTiposEducacion" value="#{beanTipoEducacion.listaModel}" var="obj"
+                         paginator="true" rows="10" selectionMode="single"
+                         lazy="true" rowKey="#{obj.cont}" 
+                         rowsPerPageTemplate="5,10,15,20,25,30,40,50"
+                         widgetVar="widgetTablaTiposEducacion" paginatorAlwaysVisible="false" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         paginatorPosition="bottom"
+			 reflow="true"
+                         style="margin-top: 20px">
+                <p:ajax event="rowDblselect" listener="#{beanTipoEducacion.showTipoEducacion}" 
+                         update=":formShowTiposEducacion:dialogShowTiposEducacion"
+                         oncomplete="PF('widgetShowTiposEducacion').show();"/>
+                <p:column headerText="Id" >
+                    <h:outputText value="#{obj.cont}" />
+		</p:column>
+                <p:column headerText="Descripcion" priority="3" style="width:90%;text-align: left;">
+                    <h:outputText value="#{obj.descrptipeducacion}" />
+                </p:column>
+                <p:column headerText="" priority="3">
+                    <p:commandLink onclick="PF('widgetTablaTiposEducacion').unselectAllRows();
+                        PF('widgetTablaTiposEducacion').selectRow(#{obj.posicion});"
+                        actionListener="#{beanTipoEducacion.onUpdateInsertRow(obj)}" 
+                        update=":formAAShowTiposEducacion:dialogTiposEducacion"
+                        title="Actualizar Registro"
+                        oncomplete="setIdActualizar(#{obj.idtipeducacion}); PF('widgetTiposEducacion').show();">
+                        <img src="#{resources}/sistema/images/update.gif" border="0" width="15px" height="15px"/>
+                    </p:commandLink>
+		</p:column>   
+                <p:column headerText="" priority="3">
+                    <a href="#" title="Eliminar Registro" 
+                       onclick="setIdDelete('#{obj.idtipeducacion}','#{obj.cont}');PF('confirmDeleteTiposEducacion').show();
+                        PF('widgetTablaTiposEducacion').unselectAllRows();
+                        PF('widgetTablaTiposEducacion').selectRow(#{obj.posicion});">
+                        <img src="#{resources}/sistema/images/borrar.png" border="0" width="15px" height="15px"/>
+                    </a>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form id="formAAShowTiposEducacion">
+            <p:dialog id="dialogTiposEducacion" header="#{beanTipoEducacion.tituloPantalla}" widgetVar="widgetTiposEducacion"
+                              showEffect="explode" hideEffect="fade" closable="false" 
+                              resizable="false"  modal="true"  responsive="true">
+                        <h:panelGroup id="panelTiposEducacion" layout="block" styleClass="ui-fluid">
+                            <p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
+                                columnClasses="ui-grid-col-6, ui-grid-col-6">
+                                <h:inputHidden id="contadorTiposEducacionActualizar" value="#{beanTipoEducacion.tipEducacion.idtipeducacion}"/>
+                                <h:inputHidden id="contadorTiposEducacionActualizar2" value="#{beanTipoEducacion.tipEducacion.idtipeducacion}"/>
+                                 <p:outputLabel value="Descripcion" for="educaciontxt" />
+                                 <p:inputText id="educaciontxt" required="true" value="#{beanTipoEducacion.tipEducacion.descrptipeducacion}" /> 
+                                 <p:commandButton id="btnCancelar" value="Cancelar"
+                                 update=":formTableTiposEducacion:tablaTiposEducacion"
+                                 immediate="true"
+                                 onclick="PF('widgetTiposEducacion').hide();"/>
+                                 <p:commandButton id="btnAceptar"
+                                    process="formAAShowTiposEducacion"
+                                    update="panelTiposEducacion :formTableTiposEducacion:messages :formTableTiposEducacion:tablaTiposEducacion"
+                                    actionListener="#{beanTipoEducacion.save}" 
+                                    value="Registrar"  
+                                    oncomplete="PF('widgetTablaTiposEducacion').unselectAllRows();if (!args.validationFailed) PF('widgetTiposEducacion').hide()"
+                                    rendered="#{beanTipoEducacion.showSave}"/>
+                                    <p:commandButton id="btnActualizar"
+                                    update="panelTiposEducacion :formTableTiposEducacion:messages :formTableTiposEducacion:tablaTiposEducacion"
+                                    actionListener="#{beanTipoEducacion.updateRow}" 
+                                    value="Actualizar" 
+                                    oncomplete="PF('widgetTablaTiposEducacion').unselectAllRows();
+                                    if (!args.validationFailed) PF('widgetTiposEducacion').hide();"
+                                    rendered="#{beanTipoEducacion.showUpdate}"/>
+                            </p:panelGrid>
+                            
+                        </h:panelGroup>
+                        
+            </p:dialog>
+        </h:form>
+        <h:form id="formShowTiposEducacion">
+            <p:dialog id="dialogShowTiposEducacion" header="#{beanTipoEducacion.tituloPantalla}" widgetVar="widgetShowTiposEducacion"
+                                  showEffect="explode" hideEffect="fade" closable="false"
+                                  resizable="false" modal="true" responsive="true">
+                <h:panelGroup id="hpanelShowTiposEducacion" layout="block" styleClass="ui-fluid">
+                    <p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
+			         columnClasses="ui-grid-col-6, ui-grid-col-6">
+                       
+                        <h:outputLabel value="Descripcion : "/>
+                        <h:outputText value="#{beanTipoEducacion.tipEducacion.descrptipeducacion}"/>
+                        
+                        <p:outputLabel/>
+                        <p:commandButton id="btnOkShow" value="Aceptar"
+                            update=" :formTableTiposEducacion:tablaTiposEducacion"
+                            onclick="PF('widgetShowTiposEducacion').hide();"/>
+                        
+                    </p:panelGrid>
+                </h:panelGroup>
+                       
+            </p:dialog>
+        </h:form>
+        <p:confirmDialog id="confirmarDelete" showEffect="drop" hideEffect="clip" 
+                message="¿Esta seguro que desea eliminar?"
+                header="Borrar Registro" severity="alert" widgetVar="confirmDeleteTiposEducacion">
+                    <h:form id="formConfirmDelete">
+                    <center>
+                    <p:commandButton id="btnBorrarSI" value="SI" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                     actionListener="#{beanTipoEducacion.delete}" 
+                                    update=":formTableTiposEducacion:tablaTiposEducacion :formTableTiposEducacion:messages"
+                                    oncomplete="if (!args.validationFailed) PF('confirmDeleteTiposEducacion').hide();"/>
+                    <h:inputHidden id="idTiposEducacionDelete" value="#{beanTipoEducacion.tipEducacion.idtipeducacion}"/>
+                    <h:inputHidden id="contadorTiposEducacionDelete" value="#{beanTipoEducacion.tipEducacion.cont}"/>
+                    <p:commandButton id="btnBorrarNO" value="NO" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"
+                                    onclick="PF('confirmDeleteTiposEducacion').hide();"/>
+                    </center>
+                    </h:form>
+        </p:confirmDialog>
+        <script type="text/javascript">
+                    function setIdActualizar(cont) {
+                       
+                        document.getElementById("formAAShowTiposEducacion:contadorTiposEducacionActualizar").value = cont;
+                     }
+                     
+                     function setIdDelete(id, cont) {
+                        document.getElementById("formConfirmDelete:idTiposEducacionDelete").value = id;
+                        document.getElementById("formConfirmDelete:contadorTiposEducacionDelete").value = cont;
+                    }
+                    
+                    
+                    function validateData(args) {
+                        if(args.validationFailed) {
+                            alert("Verifique Dato Requerido");
+                        } else if(args.statusTransaction == false) {
+                            alert(args.errorTransaction);
+                        } else {
+                            PF('widgetTiposEducacion').hide();
+                        }
+                    }
+                    
+                    
+                </script>
+    </ui:define>
+</ui:composition>
+

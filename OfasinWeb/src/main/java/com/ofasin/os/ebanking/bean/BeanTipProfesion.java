@@ -14,19 +14,19 @@
  * CR/Defecto 		Fecha 			Autor 			Descripción del cambio
  * ----------------------------------------------------------------------------
 **/
-package com.hpapg.os.ebanking.bean;
+package com.ofasin.os.ebanking.bean;
 
-import com.hpapg.sistema.dominio.DominioTipProfesion;
-import com.hpapg.sistema.negocio.TipProfesionIface;
-import com.hpapg.os.ebanking.bean.modelolazy.modeloLazyTipProfesion;
-import com.hpapg.os.ebanking.globals.Global;
+import com.ofasin.os.ebanking.model.DominioTipProfesion;
+import com.ofasin.os.ebanking.business.TipProfesionIface;
+import com.ofasin.os.ebanking.bean.modelolazy.modeloLazyTipProfesion;
+import com.ofasin.os.ebanking.globals.Global;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
-import org.primefaces.context.RequestContext;
+import org.primefaces.context.PrimeRequestContext;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
@@ -34,6 +34,7 @@ import org.primefaces.model.SortOrder;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
+import org.primefaces.PrimeFaces;
 
 
 
@@ -41,7 +42,7 @@ import org.apache.log4j.Level;
 
 
 public class BeanTipProfesion extends BeanGeneric {
-    private final static Logger log = Logger.getLogger(BeanTipoGasto.class);
+    private final static Logger log = Logger.getLogger(BeanTipProfesion.class);
     private DominioTipProfesion tipProfesion;
     private TipProfesionIface service;
     private LazyDataModel<DominioTipProfesion> listaModel;
@@ -108,7 +109,7 @@ public class BeanTipProfesion extends BeanGeneric {
     @Override
     public void save(ActionEvent event) {
         setAccion("save");
-        RequestContext context = RequestContext.getCurrentInstance();
+        // RequestContext context = RequestContext.getCurrentInstance();
         try{
             
             
@@ -118,13 +119,14 @@ public class BeanTipProfesion extends BeanGeneric {
             Global.addMsg("Registro Insertado", "El registro se insertó correctamente");
         } else {
             Global.addMsgErr("Error en Transacción", obj.getMsg());
-            
-            context.addCallbackParam("errorTransaction", obj.getMsg());
+             PrimeFaces.current().ajax().addCallbackParam("errorTransaction", obj.getMsg());
+            //context.addCallbackParam("errorTransaction", obj.getMsg());
             log.error("ERROR : "+obj.getMsg());
         }
-        context.addCallbackParam("statusTransaction", obj.isStatus());
+        
+        PrimeFaces.current().ajax().addCallbackParam("statusTransaction", obj.isStatus());
         }catch (Exception ex) {
-            Logger.getLogger(BeanTiposEstados.class.getName()).log(Level.ERROR, null, ex);
+            Logger.getLogger(BeanTipProfesion.class.getName()).log(Level.ERROR, null, ex);
         }
     }
 
@@ -142,7 +144,7 @@ public class BeanTipProfesion extends BeanGeneric {
             log.error("ERROR : "+obj.getMsg());
         }
         }catch (Exception ex) {
-            Logger.getLogger(BeanTiposEstados.class.getName()).log(Level.ERROR, null, ex);
+            Logger.getLogger(BeanTipProfesion.class.getName()).log(Level.ERROR, null, ex);
         }
     }
 
@@ -153,7 +155,7 @@ public class BeanTipProfesion extends BeanGeneric {
 
     @Override
     public void delete(ActionEvent event) {
-        RequestContext context = RequestContext.getCurrentInstance();
+        //RequestContext context = RequestContext.getCurrentInstance();
         if(tipProfesion.getIdtipprofesion()!= null) {
             
             try {
@@ -163,17 +165,18 @@ public class BeanTipProfesion extends BeanGeneric {
                 Global.addMsg("Registro Borrado", "El Registro '"+tipProfesion.getCont()+"'\n se eliminó correctamente");
             } else {
                 Global.addMsgErr("Error", obj.getMsg());
-                context.addCallbackParam("errorTransaction", obj.getMsg());
+                PrimeFaces.current().ajax().addCallbackParam("errorTransaction", obj.getMsg());
+                //context.addCallbackParam("errorTransaction", obj.getMsg());
                 log.error("ERROR : "+obj.getMsg());
             }
-            context.addCallbackParam("statusTransaction", obj.isStatus());
+            PrimeFaces.current().ajax().addCallbackParam("statusTransaction", obj.isStatus());
             } catch (Exception ex) {
-                java.util.logging.Logger.getLogger(BeanTiposOcaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(BeanTipProfesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
             
         } else {
-            context.addCallbackParam("statusTransaction", false);
-            context.addCallbackParam("errorTransaction", "El campo 'IdTipoGasto' is required");
+            PrimeFaces.current().ajax().addCallbackParam("statusTransaction", false);
+            PrimeFaces.current().ajax().addCallbackParam("errorTransaction", "El campo 'IdTipoGasto' is required");
         }
     }
 

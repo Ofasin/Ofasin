@@ -45,4 +45,50 @@
         <value>#{serviceImagenes}</value>
     </managed-property></managed-bean>
     
+    <managed-bean>
+    <managed-bean-name>modeltipEducacion</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.model.DominioTipEducacion</managed-bean-class>
+    <managed-bean-scope>none</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+   <managed-bean-name>beanTipEducacion</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.bean.BeanTipEducacion</managed-bean-class>
+
+    <managed-bean-scope>session</managed-bean-scope> 
+    
+    <managed-property>
+        <property-name>tipEducacion</property-name>
+        <value>#{modeltipEducacion}</value>
+    </managed-property>
+    <managed-property>
+        <property-name>service</property-name>
+        <value>#{serviceTipEducacion}</value>
+    </managed-property>
+</managed-bean>
+    
+    
+    
+<managed-bean>
+    <managed-bean-name>modeltipProfesion</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.model.DominioTipProfesion</managed-bean-class>
+    <managed-bean-scope>none</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+   <managed-bean-name>beanTipoProfesion</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.bean.BeanTipProfesion</managed-bean-class>
+
+    <managed-bean-scope>session</managed-bean-scope> 
+    
+    <managed-property>
+        <property-name>tipProfesion</property-name>
+        <value>#{modeltipProfesion}</value>
+    </managed-property>
+    <managed-property>
+        <property-name>service</property-name>
+        <value>#{serviceTipProfesion}</value>
+    </managed-property>
+</managed-bean>
+
 </faces-config>
