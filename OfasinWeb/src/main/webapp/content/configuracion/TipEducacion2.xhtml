@@ -1,0 +1,53 @@
+<ui:composition template="/WEB-INF/template/templateOS.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:sec="http://www.springframework.org/security/tags">
+
+	
+
+	<ui:define name="titulo">Dashboard</ui:define>
+
+	<ui:define name="bodyOS">
+		<f:metadata>
+            <f:event type="preRenderView" listener="#{beanTipEducacion.llenaLista}"/>
+        </f:metadata>
+		<h1 class="aw-page-title">Perfiles Academicos</h1>
+                
+                <h:panelGrid columns="1" cellpadding="5">
+    <p:commandButton value="Basic" type="button" onclick="PF('dlg1').show();" />
+     
+    <p:commandButton value="Modal" type="button" onclick="PF('dlg2').show();" />
+     
+    <p:commandButton value="Effects" type="button" onclick="PF('dlg3').show();" /> 
+</h:panelGrid>
+<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+    <h:outputText value="Resistance to PrimeFaces is futile!" />
+</p:dialog>
+ 
+<p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+    <h:outputText value="This is a Modal Dialog." />
+</p:dialog>   
+ 
+<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+    <h:outputText value="This dialog has nice effects." />
+</p:dialog>
+		
+                <!-- Rendered only if user has all of the listed roles -->
+                <p:outputLabel value="1  Rendered only if user has all of the listed roles " rendered="#{sec:areAllGranted('ROLE_ADMIN, ROLE_BAR')}"/>  
+  
+  <!-- Rendered only if user does not have any of the listed roles -->
+  <p:outputLabel value=" 2 Rendered only if user does not have any of the listed roles " rendered="#{sec:areNotGranted('ROLE_ADMIN, ROLE_BAR')}"/>  
+  
+  <!-- Rendered only if user has any of the listed roles -->
+  <p:outputLabel value=" 3 Rendered only if user has any of the listed roles " rendered="#{sec:areAnyGranted('ROLE_ADMIN, ROLE_BAR')}"/>  
+  
+  <!-- Rendered only if user has access to given HTTP method/URL as defined in Spring Security configuration -->
+  <p:outputLabel value=" 4 Rendered only if user has access to given HTTP method/URL as defined in Spring Security configuration" rendered="#{sec:isAllowed('/content', 'POST')}"/>  
+
+                
+	</ui:define>
+
+</ui:composition>

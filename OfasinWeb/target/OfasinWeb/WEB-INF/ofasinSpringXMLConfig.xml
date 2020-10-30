@@ -44,5 +44,5 @@
     
      <bean id="serviceImagenes" class="com.ofasin.os.ebanking.service.ServiceImagenes"/>
      <bean id="serviceTipEducacion" class="com.ofasin.os.ebanking.service.ServiceTipEducacion"/>
-    
+    <bean id="serviceTipProfesion" class="com.ofasin.os.ebanking.service.ServiceTipProfesion"/>
 </beans>

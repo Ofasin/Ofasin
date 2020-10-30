@@ -1,26 +1,9 @@
 /* BASE */
 body {
 	margin: 0;
-	font-size: 12px;
+	font-size: 13px;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-/* Login*/
-
-#login-dialog {
-	width: 290px;
-	margin: auto;
-	margin-top: 150px;
-}
-
-.grid-login {
-	background-color: #f2f2f2;
-	border-radius: 8px;
-	border: 1px solid #ccc;
-	margin-top: 8px;
-	padding: 10px
-}
-
 
 /* TABVIEW */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {

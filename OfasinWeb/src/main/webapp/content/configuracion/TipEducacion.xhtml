@@ -3,10 +3,10 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-    template="/WEB-INF/templates/Layout.xhtml">
+    template="/WEB-INF/template/Layout.xhtml">
     <ui:define name="content">
         <f:metadata>
-            <f:event type="preRenderView" listener="#{beanTipoEducacion.llenaLista}"/>
+            <f:event type="preRenderView" listener="#{beanTipEducacion.llenaLista}"/>
         </f:metadata>
         <h1 class="aw-page-title">Perfiles Academicos</h1>
         <h:form id="formTableTiposEducacion">
@@ -14,7 +14,7 @@
             <p:toolbar>
                 <p:toolbarGroup align="right">
 		    <p:commandButton value="Nuevo" icon="ui-icon-document"
-                                     actionListener="#{beanTipoEducacion.onUpdateInsertRow(null)}" 
+                                     actionListener="#{beanTipEducacion.onUpdateInsertRow(null)}" 
                         update=":formAAShowTiposEducacion:dialogTiposEducacion"
                         title="Registrar Nuevo"
                         oncomplete="PF('widgetTiposEducacion').show();">
@@ -22,7 +22,7 @@
 		</p:commandButton>
 		</p:toolbarGroup>
             </p:toolbar>
-            <p:dataTable id="tablaTiposEducacion" value="#{beanTipoEducacion.listaModel}" var="obj"
+            <p:dataTable id="tablaTiposEducacion" value="#{beanTipEducacion.listaModel}" var="obj"
                          paginator="true" rows="10" selectionMode="single"
                          lazy="true" rowKey="#{obj.cont}" 
                          rowsPerPageTemplate="5,10,15,20,25,30,40,50"
@@ -31,7 +31,7 @@
                          paginatorPosition="bottom"
 			 reflow="true"
                          style="margin-top: 20px">
-                <p:ajax event="rowDblselect" listener="#{beanTipoEducacion.showTipoEducacion}" 
+                <p:ajax event="rowDblselect" listener="#{beanTipEducacion.showTipoEducacion}" 
                          update=":formShowTiposEducacion:dialogShowTiposEducacion"
                          oncomplete="PF('widgetShowTiposEducacion').show();"/>
                 <p:column headerText="Id" >
@@ -43,7 +43,7 @@
                 <p:column headerText="" priority="3">
                     <p:commandLink onclick="PF('widgetTablaTiposEducacion').unselectAllRows();
                         PF('widgetTablaTiposEducacion').selectRow(#{obj.posicion});"
-                        actionListener="#{beanTipoEducacion.onUpdateInsertRow(obj)}" 
+                        actionListener="#{beanTipEducacion.onUpdateInsertRow(obj)}" 
                         update=":formAAShowTiposEducacion:dialogTiposEducacion"
                         title="Actualizar Registro"
                         oncomplete="setIdActualizar(#{obj.idtipeducacion}); PF('widgetTiposEducacion').show();">
@@ -61,16 +61,16 @@
             </p:dataTable>
         </h:form>
         <h:form id="formAAShowTiposEducacion">
-            <p:dialog id="dialogTiposEducacion" header="#{beanTipoEducacion.tituloPantalla}" widgetVar="widgetTiposEducacion"
+            <p:dialog id="dialogTiposEducacion" header="#{beanTipEducacion.tituloPantalla}" widgetVar="widgetTiposEducacion"
                               showEffect="explode" hideEffect="fade" closable="false" 
                               resizable="false"  modal="true"  responsive="true">
                         <h:panelGroup id="panelTiposEducacion" layout="block" styleClass="ui-fluid">
                             <p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
                                 columnClasses="ui-grid-col-6, ui-grid-col-6">
-                                <h:inputHidden id="contadorTiposEducacionActualizar" value="#{beanTipoEducacion.tipEducacion.idtipeducacion}"/>
-                                <h:inputHidden id="contadorTiposEducacionActualizar2" value="#{beanTipoEducacion.tipEducacion.idtipeducacion}"/>
+                                <h:inputHidden id="contadorTiposEducacionActualizar" value="#{beanTipEducacion.tipEducacion.idtipeducacion}"/>
+                                <h:inputHidden id="contadorTiposEducacionActualizar2" value="#{beanTipEducacion.tipEducacion.idtipeducacion}"/>
                                  <p:outputLabel value="Descripcion" for="educaciontxt" />
-                                 <p:inputText id="educaciontxt" required="true" value="#{beanTipoEducacion.tipEducacion.descrptipeducacion}" /> 
+                                 <p:inputText id="educaciontxt" required="true" value="#{beanTipEducacion.tipEducacion.descrptipeducacion}" /> 
                                  <p:commandButton id="btnCancelar" value="Cancelar"
                                  update=":formTableTiposEducacion:tablaTiposEducacion"
                                  immediate="true"
@@ -78,17 +78,17 @@
                                  <p:commandButton id="btnAceptar"
                                     process="formAAShowTiposEducacion"
                                     update="panelTiposEducacion :formTableTiposEducacion:messages :formTableTiposEducacion:tablaTiposEducacion"
-                                    actionListener="#{beanTipoEducacion.save}" 
+                                    actionListener="#{beanTipEducacion.save}" 
                                     value="Registrar"  
                                     oncomplete="PF('widgetTablaTiposEducacion').unselectAllRows();if (!args.validationFailed) PF('widgetTiposEducacion').hide()"
-                                    rendered="#{beanTipoEducacion.showSave}"/>
+                                    rendered="#{beanTipEducacion.showSave}"/>
                                     <p:commandButton id="btnActualizar"
                                     update="panelTiposEducacion :formTableTiposEducacion:messages :formTableTiposEducacion:tablaTiposEducacion"
-                                    actionListener="#{beanTipoEducacion.updateRow}" 
+                                    actionListener="#{beanTipEducacion.updateRow}" 
                                     value="Actualizar" 
                                     oncomplete="PF('widgetTablaTiposEducacion').unselectAllRows();
                                     if (!args.validationFailed) PF('widgetTiposEducacion').hide();"
-                                    rendered="#{beanTipoEducacion.showUpdate}"/>
+                                    rendered="#{beanTipEducacion.showUpdate}"/>
                             </p:panelGrid>
                             
                         </h:panelGroup>
@@ -96,7 +96,7 @@
             </p:dialog>
         </h:form>
         <h:form id="formShowTiposEducacion">
-            <p:dialog id="dialogShowTiposEducacion" header="#{beanTipoEducacion.tituloPantalla}" widgetVar="widgetShowTiposEducacion"
+            <p:dialog id="dialogShowTiposEducacion" header="#{beanTipEducacion.tituloPantalla}" widgetVar="widgetShowTiposEducacion"
                                   showEffect="explode" hideEffect="fade" closable="false"
                                   resizable="false" modal="true" responsive="true">
                 <h:panelGroup id="hpanelShowTiposEducacion" layout="block" styleClass="ui-fluid">
@@ -104,7 +104,7 @@
 			         columnClasses="ui-grid-col-6, ui-grid-col-6">
                        
                         <h:outputLabel value="Descripcion : "/>
-                        <h:outputText value="#{beanTipoEducacion.tipEducacion.descrptipeducacion}"/>
+                        <h:outputText value="#{beanTipEducacion.tipEducacion.descrptipeducacion}"/>
                         
                         <p:outputLabel/>
                         <p:commandButton id="btnOkShow" value="Aceptar"
@@ -122,11 +122,11 @@
                     <h:form id="formConfirmDelete">
                     <center>
                     <p:commandButton id="btnBorrarSI" value="SI" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{beanTipoEducacion.delete}" 
+                                     actionListener="#{beanTipEducacion.delete}" 
                                     update=":formTableTiposEducacion:tablaTiposEducacion :formTableTiposEducacion:messages"
                                     oncomplete="if (!args.validationFailed) PF('confirmDeleteTiposEducacion').hide();"/>
-                    <h:inputHidden id="idTiposEducacionDelete" value="#{beanTipoEducacion.tipEducacion.idtipeducacion}"/>
-                    <h:inputHidden id="contadorTiposEducacionDelete" value="#{beanTipoEducacion.tipEducacion.cont}"/>
+                    <h:inputHidden id="idTiposEducacionDelete" value="#{beanTipEducacion.tipEducacion.idtipeducacion}"/>
+                    <h:inputHidden id="contadorTiposEducacionDelete" value="#{beanTipEducacion.tipEducacion.cont}"/>
                     <p:commandButton id="btnBorrarNO" value="NO" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"
                                     onclick="PF('confirmDeleteTiposEducacion').hide();"/>
                     </center>

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
-import org.primefaces.context.PrimeRequestContext;
+//import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
@@ -48,6 +48,8 @@ public class BeanTipProfesion extends BeanGeneric {
     private LazyDataModel<DominioTipProfesion> listaModel;
     private List<DominioTipProfesion> listaTiposProfesion;
     private List<DominioTipProfesion> lista;
+    
+    
 
     public DominioTipProfesion getTipProfesion() {
         return tipProfesion;
@@ -125,6 +127,7 @@ public class BeanTipProfesion extends BeanGeneric {
         }
         
         PrimeFaces.current().ajax().addCallbackParam("statusTransaction", obj.isStatus());
+        //context.addCallbackParam("statusTransaction", obj.isStatus());
         }catch (Exception ex) {
             Logger.getLogger(BeanTipProfesion.class.getName()).log(Level.ERROR, null, ex);
         }
