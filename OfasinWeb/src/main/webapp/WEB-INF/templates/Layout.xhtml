@@ -10,20 +10,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 	</f:facet>
 
-	<title>AlgaWorks</title>
-
-	<h:outputStylesheet library="algaworks" name="styles/custom.css" />
-	<h:outputStylesheet library="algaworks" name="styles/layout.css" />
-	<h:outputStylesheet library="algaworks" name="styles/components.css" />
+	
+        <ui:insert name="title"><title>Ofisina Asuntos Indigenas</title></ui:insert>
+	<h:outputStylesheet library="ofasin" name="styles/custom.css" />
+	<h:outputStylesheet library="ofasin" name="styles/layout.css" />
+	<h:outputStylesheet library="ofasin" name="styles/components.css" />
 	
 	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
-	<h:outputScript target="body" library="algaworks" name="javascripts/app.js" />
+	<h:outputScript target="body" library="ofasin" name="javascripts/app.js" />
+        <h:outputScript target="body" library="javascripts" name="bootstrap.min.js" />
+        
+        <ui:param name="resources" value="#{request.getContextPath()}/resources"/>
+        <ui:param name="usuario" value="#{session.getAttribute('userInSession')}"/> 
+         <ui:insert name="icon"><link rel="shortcut icon"  href="#{request.contextPath}/resources/images/icons/login1.png" /></ui:insert>  
+          <link href="#{request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet"/> 
+          
 </h:head>
 
 <h:body>
 
 	<header class="aw-topbar">
-		<h:graphicImage library="algaworks" name="images/logo.png" />
+		<h:graphicImage library="images" name="logo.png"  width="200" height="65"/>
 		
 		<a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"></i></a>
 	</header>
@@ -36,13 +43,13 @@
 					<h:link><i class="fa  fa-fw  fa-home"></i>Dashboard</h:link>
 				</li>
 				<li class="is-selected">
-					<h:link><i class="fa  fa-fw  fa-user"></i>Clientes</h:link>
+					<h:link><i class="fa  fa-fw  fa-user"></i>Lumasen</h:link>
 				</li>
 				<li>
-					<h:link><i class="fa  fa-fw  fa-file-text"></i>Relatórios</h:link>
+					<h:link><i class="fa  fa-fw  fa-file-text"></i>Wayuu</h:link>
 				</li>
 				<li>
-					<h:link><i class="fa  fa-fw  fa-cog"></i>Configurações</h:link>
+					<h:link><i class="fa  fa-fw  fa-cog"></i>Configuracion</h:link>
 				</li>
 			</ul>
 		</nav>
@@ -52,7 +59,12 @@
 	<section class="aw-content  js-content">
 		<ui:insert name="content" />
 	</section>
-	
+    
+	<style type="text/css">
+               .ui-growl{
+                    top: 65px;
+               }
+           </style>
 </h:body>
-
+ 
 </html>

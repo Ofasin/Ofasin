@@ -11,14 +11,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 	</f:facet>
        
-        <title>Login</title>
-
-        <h:outputStylesheet library="styles" name="custom.css"/>
+        <title>Oficina Asuntos Indigenas</title>
+<link rel="shortcut icon"  href="resources/images/icons/login.png" />
+        <h:outputStylesheet library="styles" name="login.css"/>
     </h:head>
     <h:body>
     	
     
-    	<div id="login-dialog">
+    	<div class="conteiner">
     		<h1>Login</h1>
     		<p:growl id="growl" showDetail="true" life="3000" />
     		<h:form id="formLogin" onkeypress="if (event.keyCode == 13) { document.getElementById('formLogin:loginButton').click(); return false; }">
@@ -28,10 +28,10 @@
                         </p:messages>
     		
     			<h:panelGrid columns="2" styleClass="grid-login">
-    				<p:outputLabel value="E-mail" />
+    				<p:outputLabel value="Usuario" />
     				<p:inputText size="30" id="usuario"  />
     				
-    				<p:outputLabel value="Senha" />
+    				<p:outputLabel value="Password" />
     				<p:password size="30" id="password" />
     				
     				
