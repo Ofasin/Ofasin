@@ -24,37 +24,37 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author FAGONFER
  */
 @Entity
-@Table(name = "sector", catalog = "ofasin", schema = "public")
+@Table(name = "irruko", catalog = "ofasin", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Sector.findAll", query = "SELECT s FROM Sector s")
-    , @NamedQuery(name = "Sector.findByIdsector", query = "SELECT s FROM Sector s WHERE s.idsector = :idsector")
-    , @NamedQuery(name = "Sector.findByDescrp", query = "SELECT s FROM Sector s WHERE s.descrp = :descrp")})
-public class Sector implements Serializable {
+    @NamedQuery(name = "Irruko.findAll", query = "SELECT i FROM Irruko i")
+    , @NamedQuery(name = "Irruko.findByIdirruko", query = "SELECT i FROM Irruko i WHERE i.idirruko = :idirruko")
+    , @NamedQuery(name = "Irruko.findByDescrp", query = "SELECT i FROM Irruko i WHERE i.descrp = :descrp")})
+public class Irruko implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "idsector")
-    private Long idsector;
+    @Column(name = "idirruko")
+    private Long idirruko;
     @Column(name = "descrp")
     private String descrp;
-    @OneToMany(mappedBy = "idsector", fetch = FetchType.LAZY)
-    private List<Presupuesto> presupuestoList;
+    @OneToMany(mappedBy = "irruko", fetch = FetchType.LAZY)
+    private List<Wayuu> wayuuList;
 
-    public Sector() {
+    public Irruko() {
     }
 
-    public Sector(Long idsector) {
-        this.idsector = idsector;
+    public Irruko(Long idirruko) {
+        this.idirruko = idirruko;
     }
 
-    public Long getIdsector() {
-        return idsector;
+    public Long getIdirruko() {
+        return idirruko;
     }
 
-    public void setIdsector(Long idsector) {
-        this.idsector = idsector;
+    public void setIdirruko(Long idirruko) {
+        this.idirruko = idirruko;
     }
 
     public String getDescrp() {
@@ -66,29 +66,29 @@ public class Sector implements Serializable {
     }
 
     @XmlTransient
-    public List<Presupuesto> getPresupuestoList() {
-        return presupuestoList;
+    public List<Wayuu> getWayuuList() {
+        return wayuuList;
     }
 
-    public void setPresupuestoList(List<Presupuesto> presupuestoList) {
-        this.presupuestoList = presupuestoList;
+    public void setWayuuList(List<Wayuu> wayuuList) {
+        this.wayuuList = wayuuList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idsector != null ? idsector.hashCode() : 0);
+        hash += (idirruko != null ? idirruko.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sector)) {
+        if (!(object instanceof Irruko)) {
             return false;
         }
-        Sector other = (Sector) object;
-        if ((this.idsector == null && other.idsector != null) || (this.idsector != null && !this.idsector.equals(other.idsector))) {
+        Irruko other = (Irruko) object;
+        if ((this.idirruko == null && other.idirruko != null) || (this.idirruko != null && !this.idirruko.equals(other.idirruko))) {
             return false;
         }
         return true;
@@ -96,7 +96,7 @@ public class Sector implements Serializable {
 
     @Override
     public String toString() {
-        return "folder.Sector[ idsector=" + idsector + " ]";
+        return "folder.Irruko[ idirruko=" + idirruko + " ]";
     }
     
 }

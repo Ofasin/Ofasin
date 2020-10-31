@@ -12,15 +12,12 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -42,10 +39,7 @@ public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "producto_generator")
-    @SequenceGenerator(name="producto_generator", sequenceName = "sec_producto", allocationSize=1)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idproducto")
     private Long idproducto;
     @Column(name = "nombreproducto")
@@ -57,8 +51,8 @@ public class Producto implements Serializable {
     private BigDecimal valor;
     @Column(name = "idsector")
     private BigInteger idsector;
-    @OneToMany(mappedBy = "idproducto")
-    private List<Perfildetll> perfildetllList;
+    @OneToMany(mappedBy = "idproducto", fetch = FetchType.LAZY)
+    private List<Presupuestodetll> presupuestodetllList;
 
     public Producto() {
     }
@@ -108,12 +102,12 @@ public class Producto implements Serializable {
     }
 
     @XmlTransient
-    public List<Perfildetll> getPerfildetllList() {
-        return perfildetllList;
+    public List<Presupuestodetll> getPresupuestodetllList() {
+        return presupuestodetllList;
     }
 
-    public void setPerfildetllList(List<Perfildetll> perfildetllList) {
-        this.perfildetllList = perfildetllList;
+    public void setPresupuestodetllList(List<Presupuestodetll> presupuestodetllList) {
+        this.presupuestodetllList = presupuestodetllList;
     }
 
     @Override

@@ -11,15 +11,12 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,11 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Roll implements Serializable {
 
     private static final long serialVersionUID = 1L;
-   @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roll_generator")
-    @SequenceGenerator(name="roll_generator", sequenceName = "sec_roll", allocationSize=1)
+    @Id
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idroll")
     private Long idroll;
     @Basic(optional = false)
@@ -54,9 +48,9 @@ public class Roll implements Serializable {
     @Basic(optional = false)
     @Column(name = "estado")
     private short estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idroll")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idroll", fetch = FetchType.LAZY)
     private List<Permisos> permisosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idroll")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idroll", fetch = FetchType.LAZY)
     private List<Users> usersList;
 
     public Roll() {

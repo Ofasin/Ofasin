@@ -12,19 +12,16 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -43,15 +40,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Perfil.findByContratista", query = "SELECT p FROM Perfil p WHERE p.contratista = :contratista")
     , @NamedQuery(name = "Perfil.findByTechopresp", query = "SELECT p FROM Perfil p WHERE p.techopresp = :techopresp")
     , @NamedQuery(name = "Perfil.findByMonto", query = "SELECT p FROM Perfil p WHERE p.monto = :monto")
-    , @NamedQuery(name = "Perfil.findByVigencia", query = "SELECT p FROM Perfil p WHERE p.vigencia = :vigencia")})
+    , @NamedQuery(name = "Perfil.findByVigencia", query = "SELECT p FROM Perfil p WHERE p.vigencia = :vigencia")
+    , @NamedQuery(name = "Perfil.findByObs", query = "SELECT p FROM Perfil p WHERE p.obs = :obs")})
 public class Perfil implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "perfil_generator")
-    @SequenceGenerator(name="perfil_generator", sequenceName = "sec_perfil", allocationSize=1)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idperfil")
     private Long idperfil;
     @Column(name = "descrpperfil")
@@ -69,10 +64,12 @@ public class Perfil implements Serializable {
     @Column(name = "vigencia")
     @Temporal(TemporalType.DATE)
     private Date vigencia;
-    @OneToMany(mappedBy = "idperfil")
-    private List<Perfildetll> perfildetllList;
+    @Column(name = "obs")
+    private String obs;
+    @OneToMany(mappedBy = "idperfil", fetch = FetchType.LAZY)
+    private List<Presupuesto> presupuestoList;
     @JoinColumn(name = "idluma", referencedColumnName = "idluma")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Luma idluma;
 
     public Perfil() {
@@ -138,13 +135,21 @@ public class Perfil implements Serializable {
         this.vigencia = vigencia;
     }
 
-    @XmlTransient
-    public List<Perfildetll> getPerfildetllList() {
-        return perfildetllList;
+    public String getObs() {
+        return obs;
     }
 
-    public void setPerfildetllList(List<Perfildetll> perfildetllList) {
-        this.perfildetllList = perfildetllList;
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
+
+    @XmlTransient
+    public List<Presupuesto> getPresupuestoList() {
+        return presupuestoList;
+    }
+
+    public void setPresupuestoList(List<Presupuesto> presupuestoList) {
+        this.presupuestoList = presupuestoList;
     }
 
     public Luma getIdluma() {

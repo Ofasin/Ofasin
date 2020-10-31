@@ -9,16 +9,13 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,17 +32,14 @@ public class Permisos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permisos_generator")
-    @SequenceGenerator(name="permisos_generator", sequenceName = "sec_permisos", allocationSize=1)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idpermiso")
     private Long idpermiso;
     @JoinColumn(name = "idmenu", referencedColumnName = "idmenu")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Menu idmenu;
     @JoinColumn(name = "idroll", referencedColumnName = "idroll")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Roll idroll;
 
     public Permisos() {

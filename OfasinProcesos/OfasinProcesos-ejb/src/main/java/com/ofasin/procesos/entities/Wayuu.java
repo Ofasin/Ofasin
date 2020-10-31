@@ -8,23 +8,28 @@ package com.ofasin.procesos.entities;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Heidelber Gonzalez Iguaran
+ * @author FAGONFER
  */
 @Entity
 @Table(name = "wayuu", catalog = "ofasin", schema = "public")
@@ -98,20 +103,25 @@ public class Wayuu implements Serializable {
     private BigInteger estcivil;
     @Column(name = "apellidos")
     private String apellidos;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario", fetch = FetchType.LAZY)
+    private List<Users> usersList;
+    @JoinColumn(name = "irruko", referencedColumnName = "idirruko")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Irruko irruko;
     @JoinColumn(name = "luma", referencedColumnName = "idluma")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Luma luma;
     @JoinColumn(name = "tip_edu", referencedColumnName = "idtipeducacion")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private TipEducacion tipEdu;
     @JoinColumn(name = "tip_ocupacion", referencedColumnName = "idtipocupacion")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private TipOcupacion tipOcupacion;
     @JoinColumn(name = "parentesco", referencedColumnName = "idtippariente")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private TipPariente parentesco;
     @JoinColumn(name = "profesion", referencedColumnName = "idtipprofesion")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private TipProfesion profesion;
 
     public Wayuu() {
@@ -279,6 +289,23 @@ public class Wayuu implements Serializable {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    @XmlTransient
+    public List<Users> getUsersList() {
+        return usersList;
+    }
+
+    public void setUsersList(List<Users> usersList) {
+        this.usersList = usersList;
+    }
+
+    public Irruko getIrruko() {
+        return irruko;
+    }
+
+    public void setIrruko(Irruko irruko) {
+        this.irruko = irruko;
     }
 
     public Luma getLuma() {

@@ -7,19 +7,17 @@ package com.ofasin.procesos.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,23 +25,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author FAGONFER
  */
 @Entity
-@Table(name = "perfildetll", catalog = "ofasin", schema = "public")
+@Table(name = "presupuestodetll", catalog = "ofasin", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Perfildetll.findAll", query = "SELECT p FROM Perfildetll p")
-    , @NamedQuery(name = "Perfildetll.findByIdperfildetll", query = "SELECT p FROM Perfildetll p WHERE p.idperfildetll = :idperfildetll")
-    , @NamedQuery(name = "Perfildetll.findByCantprodct", query = "SELECT p FROM Perfildetll p WHERE p.cantprodct = :cantprodct")
-    , @NamedQuery(name = "Perfildetll.findByPrecioprodct", query = "SELECT p FROM Perfildetll p WHERE p.precioprodct = :precioprodct")
-    , @NamedQuery(name = "Perfildetll.findByValordetll", query = "SELECT p FROM Perfildetll p WHERE p.valordetll = :valordetll")
-    , @NamedQuery(name = "Perfildetll.findByObservacion", query = "SELECT p FROM Perfildetll p WHERE p.observacion = :observacion")})
-public class Perfildetll implements Serializable {
+    @NamedQuery(name = "Presupuestodetll.findAll", query = "SELECT p FROM Presupuestodetll p")
+    , @NamedQuery(name = "Presupuestodetll.findByIdperfildetll", query = "SELECT p FROM Presupuestodetll p WHERE p.idperfildetll = :idperfildetll")
+    , @NamedQuery(name = "Presupuestodetll.findByCantprodct", query = "SELECT p FROM Presupuestodetll p WHERE p.cantprodct = :cantprodct")
+    , @NamedQuery(name = "Presupuestodetll.findByPrecioprodct", query = "SELECT p FROM Presupuestodetll p WHERE p.precioprodct = :precioprodct")
+    , @NamedQuery(name = "Presupuestodetll.findByValordetll", query = "SELECT p FROM Presupuestodetll p WHERE p.valordetll = :valordetll")
+    , @NamedQuery(name = "Presupuestodetll.findByObservacion", query = "SELECT p FROM Presupuestodetll p WHERE p.observacion = :observacion")
+    , @NamedQuery(name = "Presupuestodetll.findByIdsector", query = "SELECT p FROM Presupuestodetll p WHERE p.idsector = :idsector")})
+public class Presupuestodetll implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "perfildetll_generator")
-    @SequenceGenerator(name="perfildetll_generator", sequenceName = "sec_perfildetll", allocationSize=1)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idperfildetll")
     private Long idperfildetll;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -55,20 +51,19 @@ public class Perfildetll implements Serializable {
     private BigDecimal valordetll;
     @Column(name = "observacion")
     private String observacion;
-    @JoinColumn(name = "idperfil", referencedColumnName = "idperfil")
-    @ManyToOne
-    private Perfil idperfil;
+    @Column(name = "idsector")
+    private BigInteger idsector;
+    @JoinColumn(name = "idpresupuesto", referencedColumnName = "idpresupuesto")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Presupuesto idpresupuesto;
     @JoinColumn(name = "idproducto", referencedColumnName = "idproducto")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Producto idproducto;
-    @JoinColumn(name = "idsector", referencedColumnName = "idsector")
-    @ManyToOne
-    private Sector idsector;
 
-    public Perfildetll() {
+    public Presupuestodetll() {
     }
 
-    public Perfildetll(Long idperfildetll) {
+    public Presupuestodetll(Long idperfildetll) {
         this.idperfildetll = idperfildetll;
     }
 
@@ -112,12 +107,20 @@ public class Perfildetll implements Serializable {
         this.observacion = observacion;
     }
 
-    public Perfil getIdperfil() {
-        return idperfil;
+    public BigInteger getIdsector() {
+        return idsector;
     }
 
-    public void setIdperfil(Perfil idperfil) {
-        this.idperfil = idperfil;
+    public void setIdsector(BigInteger idsector) {
+        this.idsector = idsector;
+    }
+
+    public Presupuesto getIdpresupuesto() {
+        return idpresupuesto;
+    }
+
+    public void setIdpresupuesto(Presupuesto idpresupuesto) {
+        this.idpresupuesto = idpresupuesto;
     }
 
     public Producto getIdproducto() {
@@ -126,14 +129,6 @@ public class Perfildetll implements Serializable {
 
     public void setIdproducto(Producto idproducto) {
         this.idproducto = idproducto;
-    }
-
-    public Sector getIdsector() {
-        return idsector;
-    }
-
-    public void setIdsector(Sector idsector) {
-        this.idsector = idsector;
     }
 
     @Override
@@ -146,10 +141,10 @@ public class Perfildetll implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Perfildetll)) {
+        if (!(object instanceof Presupuestodetll)) {
             return false;
         }
-        Perfildetll other = (Perfildetll) object;
+        Presupuestodetll other = (Presupuestodetll) object;
         if ((this.idperfildetll == null && other.idperfildetll != null) || (this.idperfildetll != null && !this.idperfildetll.equals(other.idperfildetll))) {
             return false;
         }
@@ -158,7 +153,7 @@ public class Perfildetll implements Serializable {
 
     @Override
     public String toString() {
-        return "folder.Perfildetll[ idperfildetll=" + idperfildetll + " ]";
+        return "folder.Presupuestodetll[ idperfildetll=" + idperfildetll + " ]";
     }
     
 }
