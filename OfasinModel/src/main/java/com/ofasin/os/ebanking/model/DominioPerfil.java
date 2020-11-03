@@ -9,12 +9,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
 /**
  *
- * @author Heidelber Gonzalez Iguaran
+ * @author FAGONFER
  */
 
-public class DominioPerfil extends DominioGeneric {
+public class DominioPerfil implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -25,7 +26,8 @@ public class DominioPerfil extends DominioGeneric {
     private BigDecimal techopresp;
     private BigDecimal monto;
     private Date vigencia;
-    private List<DominioPerfildetll> perfildetllList;
+    private String obs;
+    private List<DominioPresupuesto> presupuestoList;
     private DominioLuma idluma;
 
     public DominioPerfil() {
@@ -91,13 +93,21 @@ public class DominioPerfil extends DominioGeneric {
         this.vigencia = vigencia;
     }
 
- 
-    public List<DominioPerfildetll> getPerfildetllList() {
-        return perfildetllList;
+    public String getObs() {
+        return obs;
     }
 
-    public void setPerfildetllList(List<DominioPerfildetll> perfildetllList) {
-        this.perfildetllList = perfildetllList;
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
+
+   
+    public List<DominioPresupuesto> getPresupuestoList() {
+        return presupuestoList;
+    }
+
+    public void setPresupuestoList(List<DominioPresupuesto> presupuestoList) {
+        this.presupuestoList = presupuestoList;
     }
 
     public DominioLuma getIdluma() {
@@ -108,6 +118,6 @@ public class DominioPerfil extends DominioGeneric {
         this.idluma = idluma;
     }
 
-    
+  
     
 }

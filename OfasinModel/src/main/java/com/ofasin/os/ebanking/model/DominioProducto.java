@@ -12,10 +12,10 @@ import java.util.List;
 
 /**
  *
- * @author Heidelber Gonzalez Iguaran
+ * @author FAGONFER
  */
 
-public class DominioProducto extends DominioGeneric {
+public class DominioProducto extends DominioGeneric  {
 
     private static final long serialVersionUID = 1L;
     private Long idproducto;
@@ -23,7 +23,7 @@ public class DominioProducto extends DominioGeneric {
     private String descpproducto;
     private BigDecimal valor;
     private BigInteger idsector;
-    private List<DominioPerfildetll> perfildetllList;
+    private List<DominioPresupuestodetll> presupuestodetllList;
 
     public DominioProducto() {
     }
@@ -72,13 +72,13 @@ public class DominioProducto extends DominioGeneric {
         this.idsector = idsector;
     }
 
-   
-    public List<DominioPerfildetll> getPerfildetllList() {
-        return perfildetllList;
+    
+    public List<DominioPresupuestodetll> getPresupuestodetllList() {
+        return presupuestodetllList;
     }
 
-    public void setPerfildetllList(List<DominioPerfildetll> perfildetllList) {
-        this.perfildetllList = perfildetllList;
+    public void setPresupuestodetllList(List<DominioPresupuestodetll> presupuestodetllList) {
+        this.presupuestodetllList = presupuestodetllList;
     }
 
     

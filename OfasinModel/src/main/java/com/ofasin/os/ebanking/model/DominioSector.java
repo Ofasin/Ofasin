@@ -10,16 +10,16 @@ import java.util.List;
 
 /**
  *
- * @author Heidelber Gonzalez Iguaran
+ * @author FAGONFER
  */
 
-public class DominioSector extends DominioGeneric {
+public class DominioSector extends DominioGeneric  {
 
     private static final long serialVersionUID = 1L;
     
     private Long idsector;
     private String descrp;
-    private List<DominioPerfildetll> perfildetllList;
+    private List<DominioPresupuesto> presupuestoList;
 
     public DominioSector() {
     }
@@ -44,38 +44,15 @@ public class DominioSector extends DominioGeneric {
         this.descrp = descrp;
     }
 
+    
+    public List<DominioPresupuesto> getPresupuestoList() {
+        return presupuestoList;
+    }
+
+    public void setPresupuestoList(List<DominioPresupuesto> presupuestoList) {
+        this.presupuestoList = presupuestoList;
+    }
+
    
-    public List<DominioPerfildetll> getPerfildetllList() {
-        return perfildetllList;
-    }
-
-    public void setPerfildetllList(List<DominioPerfildetll> perfildetllList) {
-        this.perfildetllList = perfildetllList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idsector != null ? idsector.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DominioSector)) {
-            return false;
-        }
-        DominioSector other = (DominioSector) object;
-        if ((this.idsector == null && other.idsector != null) || (this.idsector != null && !this.idsector.equals(other.idsector))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "folder.Sector[ idsector=" + idsector + " ]";
-    }
     
 }

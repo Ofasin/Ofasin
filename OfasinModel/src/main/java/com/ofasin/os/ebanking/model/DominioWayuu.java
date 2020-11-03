@@ -8,15 +8,17 @@ package com.ofasin.os.ebanking.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
- * @author Heidelber Gonzalez Iguaran
+ * @author FAGONFER
  */
 
-public class DominioWayuu extends DominioGeneric  {
+public class DominioWayuu implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     private Long idwayuu;
     private String tpdocumento;
     private String documento;
@@ -37,6 +39,8 @@ public class DominioWayuu extends DominioGeneric  {
     private Date fechanac;
     private BigInteger estcivil;
     private String apellidos;
+    private List<DominioUsers> usersList;
+    private DominioIrruko irruko;
     private DominioLuma luma;
     private DominioTipEducacion tipEdu;
     private DominioTipOcupacion tipOcupacion;
@@ -210,6 +214,23 @@ public class DominioWayuu extends DominioGeneric  {
         this.apellidos = apellidos;
     }
 
+    
+    public List<DominioUsers> getUsersList() {
+        return usersList;
+    }
+
+    public void setUsersList(List<DominioUsers> usersList) {
+        this.usersList = usersList;
+    }
+
+    public DominioIrruko getIrruko() {
+        return irruko;
+    }
+
+    public void setIrruko(DominioIrruko irruko) {
+        this.irruko = irruko;
+    }
+
     public DominioLuma getLuma() {
         return luma;
     }
@@ -250,6 +271,6 @@ public class DominioWayuu extends DominioGeneric  {
         this.profesion = profesion;
     }
 
-    
+   
     
 }

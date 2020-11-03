@@ -7,13 +7,13 @@ package com.ofasin.os.ebanking.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-
+import java.math.BigInteger;
 /**
  *
- * @author Heidelber Gonzalez Iguaran
+ * @author FAGONFER
  */
 
-public class DominioPerfildetll extends DominioGeneric {
+public class DominioPresupuestodetll extends DominioGeneric  {
 
     private static final long serialVersionUID = 1L;
     
@@ -22,14 +22,14 @@ public class DominioPerfildetll extends DominioGeneric {
     private BigDecimal precioprodct;
     private BigDecimal valordetll;
     private String observacion;
-    private DominioPerfil idperfil;
+    private BigInteger idsector;
+    private DominioPresupuesto idpresupuesto;
     private DominioProducto idproducto;
-    private DominioSector idsector;
 
-    public DominioPerfildetll() {
+    public DominioPresupuestodetll() {
     }
 
-    public DominioPerfildetll(Long idperfildetll) {
+    public DominioPresupuestodetll(Long idperfildetll) {
         this.idperfildetll = idperfildetll;
     }
 
@@ -73,12 +73,20 @@ public class DominioPerfildetll extends DominioGeneric {
         this.observacion = observacion;
     }
 
-    public DominioPerfil getIdperfil() {
-        return idperfil;
+    public BigInteger getIdsector() {
+        return idsector;
     }
 
-    public void setIdperfil(DominioPerfil idperfil) {
-        this.idperfil = idperfil;
+    public void setIdsector(BigInteger idsector) {
+        this.idsector = idsector;
+    }
+
+    public DominioPresupuesto getIdpresupuesto() {
+        return idpresupuesto;
+    }
+
+    public void setIdpresupuesto(DominioPresupuesto idpresupuesto) {
+        this.idpresupuesto = idpresupuesto;
     }
 
     public DominioProducto getIdproducto() {
@@ -89,14 +97,6 @@ public class DominioPerfildetll extends DominioGeneric {
         this.idproducto = idproducto;
     }
 
-    public DominioSector getIdsector() {
-        return idsector;
-    }
-
-    public void setIdsector(DominioSector idsector) {
-        this.idsector = idsector;
-    }
-
-    
+  
     
 }

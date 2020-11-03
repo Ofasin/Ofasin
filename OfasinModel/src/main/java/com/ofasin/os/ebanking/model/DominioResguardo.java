@@ -17,7 +17,7 @@ public class DominioResguardo extends DominioGeneric {
 
     private static final long serialVersionUID = 1L;
     private Long idresguardo;
-    private long descrip;
+    private String descrip;
     private List<DominioLuma> lumaList;
 
     public DominioResguardo() {
@@ -27,7 +27,7 @@ public class DominioResguardo extends DominioGeneric {
         this.idresguardo = idresguardo;
     }
 
-    public DominioResguardo(Long idresguardo, long descrip) {
+    public DominioResguardo(Long idresguardo, String descrip) {
         this.idresguardo = idresguardo;
         this.descrip = descrip;
     }
@@ -40,11 +40,11 @@ public class DominioResguardo extends DominioGeneric {
         this.idresguardo = idresguardo;
     }
 
-    public long getDescrip() {
+    public String getDescrip() {
         return descrip;
     }
 
-    public void setDescrip(long descrip) {
+    public void setDescrip(String descrip) {
         this.descrip = descrip;
     }
 
