@@ -22,7 +22,7 @@
         
         <form-login 
             login-page="/Login.faces"
-            default-target-url="/content/Inicio.faces"
+            default-target-url="/content/welcome.faces"
             always-use-default-target="true"
             authentication-failure-url="/Login.faces?error=credenciales"
             username-parameter="formLogin:usuario"
@@ -44,5 +44,7 @@
     
      <bean id="serviceImagenes" class="com.ofasin.os.ebanking.service.ServiceImagenes"/>
      <bean id="serviceTipEducacion" class="com.ofasin.os.ebanking.service.ServiceTipEducacion"/>
-    <bean id="serviceTipProfesion" class="com.ofasin.os.ebanking.service.ServiceTipProfesion"/>
+     <bean id="serviceTipProfesion" class="com.ofasin.os.ebanking.service.ServiceTipProfesion"/>
+     <bean id="serviceAsociacion" class="com.ofasin.os.ebanking.service.ServiceAsociacion"/>
+     <bean id="serviceResguardo" class="com.ofasin.os.ebanking.service.ServiceResguardo"/>
 </beans>

@@ -21,7 +21,9 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 			
-			<p:messages autoUpdate="false" />
+                    <p:messages>
+                        <p:autoUpdate disabled="true"/>
+                    </p:messages>
 			
 			<div class="ui-fluid">
 				<p:tabView style="margin-top: 10px" id="tabView">
@@ -103,8 +105,10 @@
 				header="Novo endereço" resizable="false" responsive="true">
 				
 				<h:panelGroup id="novoEnderecoPanel" layout="block" styleClass="ui-fluid">
-					<p:messages autoUpdate="false" />
-				
+                                    <p:messages>
+                                        <p:autoUpdate disabled="true"/>
+                                    </p:messages>
+
 					<p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
 							columnClasses="ui-grid-col-4, ui-grid-col-8">
 						<p:outputLabel value="Logradouro" for="logradouro" />

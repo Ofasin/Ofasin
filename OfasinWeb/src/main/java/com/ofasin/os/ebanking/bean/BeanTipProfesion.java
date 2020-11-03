@@ -153,7 +153,20 @@ public class BeanTipProfesion extends BeanGeneric {
 
     @Override
     public void update(RowEditEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setAccion("update");
+        try{
+            
+        DominioTipProfesion obj = (DominioTipProfesion)service.actualizar(tipProfesion);
+        if(obj.isStatus()) {
+            Global.addMsg("Registro Actualizado", "El registro :'"+tipProfesion.getCont()+"'\n se actualizo correctamente");
+        } else {
+            
+            Global.addMsgErr("Error : ", obj.getMsg());
+            log.error("ERROR : "+obj.getMsg());
+        }
+        }catch (Exception ex) {
+            Logger.getLogger(BeanTipProfesion.class.getName()).log(Level.ERROR, null, ex);
+        }
     }
 
     @Override

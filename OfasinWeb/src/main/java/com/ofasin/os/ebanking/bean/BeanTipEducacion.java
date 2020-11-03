@@ -1,12 +1,12 @@
 /**
- * Todos los Derechos Reservados © 2019 WAYUU - SOFT.
+ * Todos los Derechos Reservados © 2020 WAYUU - SOFT.
  * Sistema de Control y verificacion de Simpatisantes.
  * Este software contiene información propiedad exclusiva de WAYUU - SOFT considerada Confidencial.
  * Queda totalmente prohibido su uso o divulgación en forma parcial o total.
  * ----------------------------------------------------------------------------
- * Nombre de Aplicacion: Sistema AGORA
+ * Nombre de Aplicacion: Sistema Ofasin
  * Nombre de archivo: BeanTipEducacion.java
- * Fecha de creacion : Febrero, 2019
+ * Fecha de creacion : noviembre, 2020
  * @author : Heidelber Gonzalez Iguaran
  * @version 1.0
  *
@@ -98,6 +98,8 @@ public class BeanTipEducacion  extends BeanGeneric{
             log.error("ERROR llenaTiposEventos : "+e);
         }
     }
+    
+    
 
 
     @Override
@@ -150,7 +152,20 @@ public class BeanTipEducacion  extends BeanGeneric{
 
     @Override
     public void update(RowEditEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setAccion("update");
+        try{
+            
+        DominioTipEducacion obj = (DominioTipEducacion)service.actualizar(tipEducacion);
+        if(obj.isStatus()) {
+            Global.addMsg("Registro Actualizado", "El registro :'"+tipEducacion.getCont()+"'\n se actualizo correctamente");
+        } else {
+            
+            Global.addMsgErr("Error : ", obj.getMsg());
+            log.error("ERROR : "+obj.getMsg());
+        }
+        }catch (Exception ex) {
+            Logger.getLogger(BeanTipEducacion.class.getName()).log(Level.ERROR, null, ex);
+        }
     }
 
     @Override

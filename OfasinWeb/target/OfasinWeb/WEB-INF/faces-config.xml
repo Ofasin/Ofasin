@@ -91,4 +91,48 @@
     </managed-property>
 </managed-bean>
 
+<managed-bean>
+    <managed-bean-name>modelResguardo</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.model.DominioResguardo</managed-bean-class>
+    <managed-bean-scope>none</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+   <managed-bean-name>beanResguardo</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.bean.BeanResguardo</managed-bean-class>
+
+    <managed-bean-scope>session</managed-bean-scope> 
+    
+    <managed-property>
+        <property-name>resguardo</property-name>
+        <value>#{modelResguardo}</value>
+    </managed-property>
+    <managed-property>
+        <property-name>service</property-name>
+        <value>#{serviceResguardo}</value>
+    </managed-property>
+</managed-bean>
+
+
+<managed-bean>
+    <managed-bean-name>modelAsociacion</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.model.DominioAsociacion</managed-bean-class>
+    <managed-bean-scope>none</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+   <managed-bean-name>beanAsociacion</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.bean.BeanAsociacion</managed-bean-class>
+
+    <managed-bean-scope>session</managed-bean-scope> 
+    
+    <managed-property>
+        <property-name>asociacion</property-name>
+        <value>#{modelAsociacion}</value>
+    </managed-property>
+    <managed-property>
+        <property-name>service</property-name>
+        <value>#{serviceAsociacion}</value>
+    </managed-property>
+</managed-bean>
 </faces-config>
