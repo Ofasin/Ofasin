@@ -22,7 +22,6 @@ public class DominioProducto extends DominioGeneric  {
     private String nombreproducto;
     private String descpproducto;
     private BigDecimal valor;
-    private BigInteger idsector;
     private List<DominioPresupuestodetll> presupuestodetllList;
 
     public DominioProducto() {
@@ -62,14 +61,6 @@ public class DominioProducto extends DominioGeneric  {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
-    }
-
-    public BigInteger getIdsector() {
-        return idsector;
-    }
-
-    public void setIdsector(BigInteger idsector) {
-        this.idsector = idsector;
     }
 
     
