@@ -1,6 +1,6 @@
 /**
  * Todos los Derechos Reservados © 2020 Wayuu - Soft .
- * Sistema Fredy.
+ * Sistema Ofasin.
  * Este software contiene información propiedad exclusiva de Wayuu - Soft considerada Confidencial.
  * Queda totalmente prohibido su uso o divulgación en forma parcial o total.
  * ----------------------------------------------------------------------------

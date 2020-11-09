@@ -16,6 +16,7 @@ com\ofasin\procesos\entities\TipEstservicio.class
 com\ofasin\procesos\entities\Sector_.class
 com\ofasin\procesos\entities\Imagenes.class
 com\ofasin\procesos\entities\TipOcupacion.class
+com\ofasin\procesos\bean\SessionBeanLuma.class
 com\ofasin\procesos\bean\SessionBeanTipOcupacion.class
 com\ofasin\procesos\entities\Municipios_.class
 com\ofasin\procesos\entities\Imagenes_.class

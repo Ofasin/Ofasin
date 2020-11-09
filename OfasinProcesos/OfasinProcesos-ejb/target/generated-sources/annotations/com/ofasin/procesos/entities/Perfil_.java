@@ -9,7 +9,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-11-02T08:46:37")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-11-08T20:17:04")
 @StaticMetamodel(Perfil.class)
 public class Perfil_ { 
 
@@ -18,6 +18,7 @@ public class Perfil_ {
     public static volatile SingularAttribute<Perfil, String> contratista;
     public static volatile SingularAttribute<Perfil, BigDecimal> monto;
     public static volatile SingularAttribute<Perfil, Date> fecradica;
+    public static volatile SingularAttribute<Perfil, byte[]> archivo;
     public static volatile ListAttribute<Perfil, Presupuesto> presupuestoList;
     public static volatile SingularAttribute<Perfil, Luma> idluma;
     public static volatile SingularAttribute<Perfil, Long> idperfil;

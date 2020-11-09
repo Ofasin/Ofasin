@@ -36,15 +36,15 @@ public class SessionBeanAsociacion implements AsociacionIface{
 
     @Override
     public List<DominioAsociacion> getAll() throws Exception {
-        List<Asociacion> entityResguardo = new ArrayList<>();
+        List<Asociacion> entityAsociacion = new ArrayList<>();
         List<DominioAsociacion> listaDominio = new ArrayList<>();
         try {
                 Session session = em.unwrap(Session.class);
                 Criteria criteria = session.createCriteria(com.ofasin.procesos.entities.Asociacion.class);
-                entityResguardo= criteria.list();
+                entityAsociacion= criteria.list();
                 int cont = 1;
-                if(entityResguardo.size()>0){
-                    for(Asociacion obj: entityResguardo) {            
+                if(entityAsociacion.size()>0){
+                    for(Asociacion obj: entityAsociacion) {            
                     DominioAsociacion dominio = new DominioAsociacion();
                     dominio.setIdasocicion(obj.getIdasocicion());
                     dominio.setNombre(obj.getNombre());
@@ -99,7 +99,7 @@ public class SessionBeanAsociacion implements AsociacionIface{
                     
                 } 
             }
-            criteria.addOrder(Order.asc("idtipeducacion"));
+            criteria.addOrder(Order.asc("idasocicion"));
              entityAsociacion=criteria.list();
         
             int cont = first+1;

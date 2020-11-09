@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FAGONFER
+ * @author Heidelber Gonzalez Iguaran
  */
 @Entity
 @Table(name = "asociacion", catalog = "ofasin", schema = "public")

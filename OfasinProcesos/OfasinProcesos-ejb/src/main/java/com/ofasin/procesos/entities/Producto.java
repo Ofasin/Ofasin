@@ -37,8 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Producto.findByIdproducto", query = "SELECT p FROM Producto p WHERE p.idproducto = :idproducto")
     , @NamedQuery(name = "Producto.findByNombreproducto", query = "SELECT p FROM Producto p WHERE p.nombreproducto = :nombreproducto")
     , @NamedQuery(name = "Producto.findByDescpproducto", query = "SELECT p FROM Producto p WHERE p.descpproducto = :descpproducto")
-    , @NamedQuery(name = "Producto.findByValor", query = "SELECT p FROM Producto p WHERE p.valor = :valor")
-    , @NamedQuery(name = "Producto.findByIdsector", query = "SELECT p FROM Producto p WHERE p.idsector = :idsector")})
+    , @NamedQuery(name = "Producto.findByValor", query = "SELECT p FROM Producto p WHERE p.valor = :valor")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,8 +55,7 @@ public class Producto implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
     private BigDecimal valor;
-    @Column(name = "idsector")
-    private BigInteger idsector;
+    
     @OneToMany(mappedBy = "idproducto", fetch = FetchType.LAZY)
     private List<Presupuestodetll> presupuestodetllList;
 
@@ -100,13 +98,7 @@ public class Producto implements Serializable {
         this.valor = valor;
     }
 
-    public BigInteger getIdsector() {
-        return idsector;
-    }
-
-    public void setIdsector(BigInteger idsector) {
-        this.idsector = idsector;
-    }
+    
 
     @XmlTransient
     public List<Presupuestodetll> getPresupuestodetllList() {
@@ -139,7 +131,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "folder.Producto[ idproducto=" + idproducto + " ]";
+        return "com.ofasin.procesos.entities.Producto[ idproducto=" + idproducto + " ]";
     }
     
 }

@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -73,6 +74,9 @@ public class Perfil implements Serializable {
     private Date vigencia;
     @Column(name = "obs")
     private String obs;
+    @Lob
+    @Column(name = "archivo")
+    private byte[] archivo;
     @OneToMany(mappedBy = "idperfil", fetch = FetchType.LAZY)
     private List<Presupuesto> presupuestoList;
     @JoinColumn(name = "idluma", referencedColumnName = "idluma")
@@ -148,6 +152,13 @@ public class Perfil implements Serializable {
 
     public void setObs(String obs) {
         this.obs = obs;
+    }
+    public byte[] getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(byte[] archivo) {
+        this.archivo = archivo;
     }
 
     @XmlTransient
