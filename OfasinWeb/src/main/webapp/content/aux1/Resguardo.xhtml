@@ -52,7 +52,7 @@
 		</p:column>   
                 <p:column headerText="" priority="3">
                     <a href="#" title="Eliminar Registro" 
-                       onclick="setIdDelete('#{obj.idresguardo}');PF('confirmDeleteResguardo').show();
+                       onclick="setIdDelete('#{obj.idresguardo}','#{obj.cont}');PF('confirmDeleteResguardo').show();
                         PF('widgetTablaResguardo').unselectAllRows();
                         PF('widgetTablaResguardo').selectRow(#{obj.posicion});">
                         <img src="#{resources}/images/borrar.png" border="0" width="15px" height="15px"/>

@@ -135,4 +135,26 @@
         <value>#{serviceAsociacion}</value>
     </managed-property>
 </managed-bean>
+
+<managed-bean>
+    <managed-bean-name>modelLuma</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.model.DominioLuma</managed-bean-class>
+    <managed-bean-scope>none</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+   <managed-bean-name>beanLuma</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.bean.BeanLuma</managed-bean-class>
+
+    <managed-bean-scope>session</managed-bean-scope> 
+    
+    <managed-property>
+        <property-name>luma</property-name>
+        <value>#{modelLuma}</value>
+    </managed-property>
+    <managed-property>
+        <property-name>service</property-name>
+        <value>#{serviceLuma}</value>
+    </managed-property>
+</managed-bean>
 </faces-config>

@@ -12,14 +12,17 @@ com\ofasin\os\ebanking\service\ServiceLogin.class
 com\ofasin\os\ebanking\bean\BeanMenu.class
 com\ofasin\os\ebanking\utils\ImageStreamUserLog.class
 com\ofasin\os\ebanking\bean\BeanGeneric.class
+com\ofasin\os\ebanking\bean\modelolazy\modeloLazyLuma.class
 com\algaworks\model\Endereco.class
 com\ofasin\os\ebanking\service\ServiceImagenes.class
 com\algaworks\controller\ClientesManager.class
 com\ofasin\os\ebanking\utils\Utilidades.class
 com\ofasin\os\ebanking\globals\Global.class
+com\ofasin\os\ebanking\service\ServiceLuma.class
 com\ofasin\os\ebanking\bean\BeanAsociacion.class
 com\ofasin\os\ebanking\bean\modelolazy\modeloLazyResguardo.class
 com\ofasin\os\ebanking\bean\BeanWelcome.class
 com\ofasin\os\ebanking\details\Usuario.class
 com\ofasin\os\ebanking\service\ServiceResguardo.class
 com\ofasin\os\ebanking\bean\BeanResguardo.class
+com\ofasin\os\ebanking\bean\BeanLuma.class

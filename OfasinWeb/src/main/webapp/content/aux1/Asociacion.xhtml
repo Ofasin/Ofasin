@@ -1,0 +1,164 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+        template="/WEB-INF/templates/Layout.xhtml">
+    <ui:define name="content">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{beanAsociacion.llenaLista}"/>
+        </f:metadata>
+        <h1 class="aw-page-title">Asociaciones Indigenas del municipio de Maicao</h1>
+        
+          <h:form id="formTableAsociacion">
+            <p:growl id="messages" showDetail="true" showSummary="true"/>
+            <p:toolbar>
+                <p:toolbarGroup align="right">
+		    <p:commandButton value="Nuevo" icon="ui-icon-document"
+                                     actionListener="#{beanAsociacion.onUpdateInsertRow(null)}" 
+                        update=":formAAShowAsociacion:dialogAsociacion"
+                        title="Registrar Nuevo"
+                        oncomplete="PF('widgetAsociacion').show();">
+			<p:resetInput target="formAAShowAsociacion:dialogAsociacion" />
+		</p:commandButton>
+		</p:toolbarGroup>
+            </p:toolbar>
+            <p:dataTable id="tablaAsociacion" value="#{beanAsociacion.listaModel}" var="obj"
+                         paginator="true" rows="10" selectionMode="single"
+                         lazy="true" rowKey="#{obj.cont}" 
+                         rowsPerPageTemplate="5,10,15,20,25,30,40,50"
+                         widgetVar="widgetTablaAsociacion" paginatorAlwaysVisible="false" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         paginatorPosition="bottom"
+			 reflow="true"
+                         style="margin-top: 20px">
+                <p:ajax event="rowDblselect" listener="#{beanAsociacion.showAsociacion}" 
+                         update=":formShowAsociacion:dialogShowAsociacion"
+                         oncomplete="PF('widgetShowAsociacion').show();"/>
+                <p:column headerText="Id" >
+                    <h:outputText value="#{obj.cont}" />
+		</p:column>
+                <p:column headerText="Descripcion" priority="3" style="width:90%;text-align: left;">
+                    <h:outputText value="#{obj.nombre}" />
+                </p:column>
+                <p:column headerText="" priority="3">
+                    <p:commandLink onclick="PF('widgetTablaAsociacion').unselectAllRows();
+                        PF('widgetTablaAsociacion').selectRow(#{obj.posicion});"
+                        actionListener="#{beanAsociacion.onUpdateInsertRow(obj)}" 
+                        update=":formAAShowAsociacion:dialogAsociacion"
+                        title="Actualizar Registro"
+                        oncomplete="setIdActualizar(#{obj.idasocicion}); PF('widgetAsociacion').show();">
+                        <img src="#{resources}/images/update.gif" border="0" width="15px" height="15px"/>
+                    </p:commandLink>
+		</p:column>   
+                <p:column headerText="" priority="3">
+                    <a href="#" title="Eliminar Registro" 
+                       onclick="setIdDelete('#{obj.idasocicion}','#{obj.cont}');PF('confirmDeleteAsociacion').show();
+                        PF('widgetTablaAsociacion').unselectAllRows();
+                        PF('widgetTablaAsociacion').selectRow(#{obj.posicion});">
+                        <img src="#{resources}/images/borrar.png" border="0" width="15px" height="15px"/>
+                    </a>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        
+        
+        <h:form id="formAAShowAsociacion">
+            <p:dialog id="dialogAsociacion" header="#{beanAsociacion.tituloPantalla}" widgetVar="widgetAsociacion"
+                              showEffect="explode" hideEffect="fade" closable="false" 
+                              resizable="false"  modal="true"  responsive="true">
+                        <h:panelGroup id="panelResguardo" layout="block" styleClass="ui-fluid">
+                            <p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
+                                columnClasses="ui-grid-col-6, ui-grid-col-6">
+                                <h:inputHidden id="contadorAsociacionActualizar" value="#{beanAsociacion.asociacion.idasocicion}"/>
+                                <h:inputHidden id="contadorAsociacionActualizar2" value="#{beanAsociacion.asociacion.idasocicion}"/>
+                                 <p:outputLabel value="Descripcion" for="asociaciontxt" />
+                                 <p:inputText id="asociaciontxt" required="true" value="#{beanAsociacion.asociacion.nombre}" /> 
+                                 <p:commandButton id="btnCancelar" value="Cancelar"
+                                 update=":formTableAsociacion:tablaAsociacion"
+                                 immediate="true"
+                                 onclick="PF('widgetAsociacion').hide();"/>
+                                 <p:commandButton id="btnAceptar"
+                                    process="formAAShowAsociacion"
+                                    update="panelResguardo :formTableAsociacion:messages :formTableAsociacion:tablaAsociacion"
+                                    actionListener="#{beanAsociacion.save}" 
+                                    value="Registrar"  
+                                    oncomplete="PF('widgetTablaAsociacion').unselectAllRows();if (!args.validationFailed) PF('widgetAsociacion').hide()"
+                                    rendered="#{beanAsociacion.showSave}"/>
+                                    <p:commandButton id="btnActualizar"
+                                    update="panelResguardo :formTableAsociacion:messages :formTableAsociacion:tablaAsociacion"
+                                    actionListener="#{beanAsociacion.updateRow}" 
+                                    value="Actualizar" 
+                                    oncomplete="PF('widgetTablaAsociacion').unselectAllRows();
+                                    if (!args.validationFailed) PF('widgetAsociacion').hide();"
+                                    rendered="#{beanAsociacion.showUpdate}"/>
+                            </p:panelGrid>
+                            
+                        </h:panelGroup>
+                        
+            </p:dialog>
+        </h:form>
+        <h:form id="formShowAsociacion">
+            <p:dialog id="dialogShowAsociacion" header="#{beanAsociacion.tituloPantalla}" widgetVar="widgetShowAsociacion"
+                                  showEffect="explode" hideEffect="fade" closable="false"
+                                  resizable="false" modal="true" responsive="true">
+                <h:panelGroup id="hpanelResguardo" layout="block" styleClass="ui-fluid">
+                    <p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noborder"
+			         columnClasses="ui-grid-col-6, ui-grid-col-6">
+                       
+                        <h:outputLabel value="Descripcion : "/>
+                        <h:outputText value="#{beanAsociacion.asociacion.nombre}"/>
+                        
+                        <p:outputLabel/>
+                        <p:commandButton id="btnOkShow" value="Aceptar"
+                            update=" :formTableAsociacion:tablaAsociacion"
+                            onclick="PF('widgetShowAsociacion').hide();"/>
+                        
+                    </p:panelGrid>
+                </h:panelGroup>
+                       
+            </p:dialog>
+        </h:form>
+        <p:confirmDialog id="confirmarDelete" showEffect="drop" hideEffect="clip" 
+                message="¿Esta seguro que desea eliminar?"
+                header="Borrar Registro" severity="alert" widgetVar="confirmDeleteAsociacion">
+                    <h:form id="formConfirmDelete">
+                    <center>
+                    <p:commandButton id="btnBorrarSI" value="SI" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                     actionListener="#{beanAsociacion.delete}" 
+                                    update=":formTableAsociacion:tablaAsociacion :formTableAsociacion:messages"
+                                    oncomplete="if (!args.validationFailed) PF('confirmDeleteAsociacion').hide();"/>
+                    <h:inputHidden id="idAsociacionDelete" value="#{beanAsociacion.asociacion.idasocicion}"/>
+                    <h:inputHidden id="contadorAsociacionDelete" value="#{beanAsociacion.asociacion.cont}"/>
+                    <p:commandButton id="btnBorrarNO" value="NO" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"
+                                    onclick="PF('confirmDeleteAsociacion').hide();"/>
+                    </center>
+                    </h:form>
+        </p:confirmDialog>
+        <script type="text/javascript">
+                    function setIdActualizar(cont) {
+                       
+                        document.getElementById("formAAShowAsociacion:contadorAsociacionActualizar").value = cont;
+                     }
+                     
+                     function setIdDelete(id, cont) {
+                        document.getElementById("formConfirmDelete:idAsociacionDelete").value = id;
+                        document.getElementById("formConfirmDelete:contadorAsociacionDelete").value = cont;
+                    }
+                    
+                    
+                    function validateData(args) {
+                        if(args.validationFailed) {
+                            alert("Verifique Dato Requerido");
+                        } else if(args.statusTransaction == false) {
+                            alert(args.errorTransaction);
+                        } else {
+                            PF('widgetAsociacion').hide();
+                        }
+                    }
+                    
+                    
+                </script>
+        
+    </ui:define>
+</ui:composition>

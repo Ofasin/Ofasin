@@ -109,7 +109,7 @@ public class ServiceResguardo implements ResguardoIface{
     @Override
     public DominioResguardo borrar(DominioResguardo obj) throws Exception {
          try {
-            ejb = (ResguardoIface)Utilidades.getEJBRemote("ejbTipEducacion", ResguardoIface.class.getName());
+            ejb = (ResguardoIface)Utilidades.getEJBRemote("ejbResguardo", ResguardoIface.class.getName());
         } catch (Exception ex) {
             Logger.getLogger(ServiceResguardo.class.getName()).log(Level.SEVERE, null, ex);
         }

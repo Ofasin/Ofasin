@@ -6,7 +6,7 @@
  * ----------------------------------------------------------------------------
  * Nombre de Aplicacion: Sistema Ofasin
  * Nombre de archivo: BeanTipEducacion.java
- * Fecha de creacion : noviembre, 2020
+ * Fecha de creacion : Noviembre, 2020
  * @author : Heidelber Gonzalez Iguaran
  * @version 1.0
  *

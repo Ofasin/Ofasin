@@ -47,4 +47,5 @@
      <bean id="serviceTipProfesion" class="com.ofasin.os.ebanking.service.ServiceTipProfesion"/>
      <bean id="serviceAsociacion" class="com.ofasin.os.ebanking.service.ServiceAsociacion"/>
      <bean id="serviceResguardo" class="com.ofasin.os.ebanking.service.ServiceResguardo"/>
+     <bean id="serviceLuma" class="com.ofasin.os.ebanking.service.ServiceLuma"/>
 </beans>
