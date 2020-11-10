@@ -38,8 +38,14 @@
                 <p:column headerText="Id" >
                     <h:outputText value="#{obj.cont}" />
 		</p:column>
-                <p:column headerText="Descripcion" priority="3" style="width:90%;text-align: left;">
+                <p:column headerText="Descripcion" priority="3" style="width:30%;text-align: left;">
                     <h:outputText value="#{obj.descrluma}" />
+                </p:column>
+                <p:column headerText="Resguardo" priority="3" style="width:30%;text-align: left;">
+                    <h:outputText value="#{obj.idresguardo.descrip}" />
+                </p:column>
+                <p:column headerText="Asociacion" priority="3" style="width:30%;text-align: left;">
+                    <h:outputText value="#{obj.idasociacion.nombre}" />
                 </p:column>
                 <p:column headerText="" priority="3">
                     <p:commandLink onclick="PF('widgetTablaLuma').unselectAllRows();
@@ -71,7 +77,11 @@
                                 <h:inputHidden id="contadorLumaActualizar" value="#{beanLuma.luma.idluma}"/>
                                 <h:inputHidden id="contadorLumaActualizar2" value="#{beanLuma.luma.idluma}"/>
                                  <p:outputLabel value="Descripcion" for="lumatxt" />
-                                 <p:inputText id="lumatxt" required="true" value="#{beanLuma.luma.descrptipeducacion}" /> 
+                                 <p:inputText id="lumatxt" required="true" value="#{beanLuma.luma.descrluma}" /> 
+                                 <p:outputLabel value="Resguardo" for="resguardotxt" />
+                                 <p:inputText id="resguardotxt" required="true" value="#{beanLuma.luma.idresguardo.descrip}" /> 
+                                 <p:outputLabel value="Asociacion" for="asociaciontxt" />
+                                 <p:inputText id="asociaciontxt" required="true" value="#{beanLuma.luma.idasociacion.nombre}" /> 
                                  <p:commandButton id="btnCancelar" value="Cancelar"
                                  update=":formTableLuma:tablaLuma"
                                  immediate="true"
@@ -105,7 +115,7 @@
 			         columnClasses="ui-grid-col-6, ui-grid-col-6">
                        
                         <h:outputLabel value="Descripcion : "/>
-                        <h:outputText value="#{beanLuma.tipEducacion.descrptipeducacion}"/>
+                        <h:outputText value="#{beanLuma.luma.descrluma}"/>
                         
                         <p:outputLabel/>
                         <p:commandButton id="btnOkShow" value="Aceptar"
