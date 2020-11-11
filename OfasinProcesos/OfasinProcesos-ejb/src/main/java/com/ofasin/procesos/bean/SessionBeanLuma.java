@@ -300,4 +300,71 @@ public class SessionBeanLuma implements LumaIface{
         }
         return obj;
     }
+
+    @Override
+    public List<DominioAsociacion> getListaAsociacion() {
+        List<Asociacion> entityAsociacion = new ArrayList<>();
+        List<DominioAsociacion> listaDominio = new ArrayList<>();
+        try {
+                Session session = em.unwrap(Session.class);
+                Criteria criteria = session.createCriteria(com.ofasin.procesos.entities.Asociacion.class);
+                entityAsociacion= criteria.list();
+                int cont = 1;
+                if(entityAsociacion.size()>0){
+                    for(Asociacion obj: entityAsociacion) {            
+                    DominioAsociacion dominio = new DominioAsociacion();
+                    dominio.setIdasocicion(obj.getIdasocicion());
+                    dominio.setNombre(obj.getNombre());
+                    dominio.setBarrio(obj.getBarrio());
+                    dominio.setDireccion(obj.getDireccion());
+                    dominio.setTelefono(obj.getTelefono());
+                    dominio.setCont(cont++);
+                    dominio.setStatus(true);
+                    listaDominio.add(dominio);
+                    }
+                }
+                
+             
+        } catch (Exception e) {
+            e.printStackTrace();
+            DominioAsociacion dominio = new DominioAsociacion();
+            dominio.setCont(1);
+            dominio.setStatus(false);
+            dominio.setMsg("Error de Transaccion : "+e.getMessage());
+            listaDominio.add(dominio);
+        }
+        return listaDominio; 
+    }
+
+    @Override
+    public List<DominioResguardo> getListaResguardo() {
+        List<Resguardo> entityResguardo = new ArrayList<>();
+        List<DominioResguardo> listaDominio = new ArrayList<>();
+        try {
+                Session session = em.unwrap(Session.class);
+                Criteria criteria = session.createCriteria(com.ofasin.procesos.entities.Resguardo.class);
+                entityResguardo= criteria.list();
+                int cont = 1;
+                if(entityResguardo.size()>0){
+                    for(Resguardo obj: entityResguardo) {            
+                    DominioResguardo dominio = new DominioResguardo();
+                    dominio.setIdresguardo(obj.getIdresguardo());
+                    dominio.setDescrip(obj.getDescrip());
+                    dominio.setCont(cont++);
+                    dominio.setStatus(true);
+                    listaDominio.add(dominio);
+                    }
+                }
+                
+             
+        } catch (Exception e) {
+            e.printStackTrace();
+            DominioResguardo dominio = new DominioResguardo();
+            dominio.setCont(1);
+            dominio.setStatus(false);
+            dominio.setMsg("Error de Transaccion : "+e.getMessage());
+            listaDominio.add(dominio);
+        }
+        return listaDominio; 
+    }
 }
