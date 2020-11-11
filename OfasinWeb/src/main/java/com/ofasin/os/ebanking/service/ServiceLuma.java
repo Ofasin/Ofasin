@@ -21,6 +21,8 @@ package com.ofasin.os.ebanking.service;
 
 import com.ofasin.os.ebanking.model.DominioLuma;
 import com.ofasin.os.ebanking.business.LumaIface;
+import com.ofasin.os.ebanking.model.DominioAsociacion;
+import com.ofasin.os.ebanking.model.DominioResguardo;
 import com.ofasin.os.ebanking.utils.Utilidades;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,14 +47,7 @@ public class ServiceLuma implements LumaIface{
     public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters) {
         try {
             ejb = (LumaIface)Utilidades.getEJBRemote("ejbLuma", LumaIface.class.getName());
-            List<DominioLuma> test = new ArrayList();
-            
-            test = ejb.getListaPagination(first,pageSize, filters );
-            System.out.println("Size : "+test.size());
-            for(DominioLuma test1: test) { 
-                System.out.println("Mensaje de error = "+test1.getMsg());
-            }
-            
+                       
         } catch (Exception ex) {
             Logger.getLogger(ServiceLuma.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -108,6 +103,28 @@ public class ServiceLuma implements LumaIface{
             Logger.getLogger(ServiceLuma.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ejb.borrar(obj);
+    }
+
+    @Override
+    public List<DominioAsociacion> getListaAsociacion() {
+         try {
+            ejb = (LumaIface)Utilidades.getEJBRemote("ejbLuma", LumaIface.class.getName());
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ServiceLuma.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ejb.getListaAsociacion();
+    }
+
+    @Override
+    public List<DominioResguardo> getListaResguardo() {
+         try {
+            ejb = (LumaIface)Utilidades.getEJBRemote("ejbLuma", LumaIface.class.getName());
+        } catch (Exception ex) {
+            Logger.getLogger(ServiceLuma.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ejb.getListaResguardo();
     }
     
     

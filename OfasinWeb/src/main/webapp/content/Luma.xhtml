@@ -76,14 +76,24 @@
                                 columnClasses="ui-grid-col-6, ui-grid-col-6">
                                 <h:inputHidden id="contadorLumaActualizar" value="#{beanLuma.luma.idluma}"/>
                                 <h:inputHidden id="contadorLumaActualizar2" value="#{beanLuma.luma.idluma}"/>
-                                 <p:outputLabel value="Descripcion" for="lumatxt" />
-                                 <p:inputText id="lumatxt" required="true" value="#{beanLuma.luma.descrluma}" /> 
-                                 <p:outputLabel value="Resguardo" for="resguardotxt" />
-                                 <p:inputText id="resguardotxt" required="true" value="#{beanLuma.luma.idresguardo.descrip}" /> 
-                                 <p:outputLabel value="Asociacion" for="asociaciontxt" />
-                                 <p:inputText id="asociaciontxt" required="true" value="#{beanLuma.luma.idasociacion.nombre}" /> 
-                                 <p:commandButton id="btnCancelar" value="Cancelar"
-                                 update=":formTableLuma:tablaLuma"
+                                <p:outputLabel value="Descripcion" for="lumatxt" />
+                                <p:inputText id="lumatxt" required="true" value="#{beanLuma.luma.descrluma}" /> 
+                                <p:outputLabel value="Resguardo" for="cmbResguardo" />
+                                <p:selectOneMenu id="cmbResguardo" value="#{beanLuma.luma.idresguardo}">
+                                    <f:selectItem itemLabel="Seleccione una opción"/>
+                                    <f:selectItems value="#{beanLuma.listaResguardo}"
+                                                   var="resgrd" itemLabel="#{resgrd.descrip}"
+                                                   itemValue="#{resgrd}" />
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Asociacion" for="cmbAsociacion" />
+                                 <p:selectOneMenu id="cmbAsociacion" value="#{beanLuma.luma.idasociacion}">
+                                    <f:selectItem itemLabel="Seleccione una opción"/>
+                                    <f:selectItems value="#{beanLuma.listaAsociacon}"
+                                                   var="asoccn" itemLabel="#{asoccn.nombre}"
+                                                   itemValue="#{asoccn}" />
+                                </p:selectOneMenu>
+                                <p:commandButton id="btnCancelar" value="Cancelar"
+                                                 update=":formTableLuma:tablaLuma"
                                  immediate="true"
                                  onclick="PF('widgetLuma').hide();"/>
                                  <p:commandButton id="btnAceptar"

@@ -17,6 +17,8 @@
 package com.ofasin.os.ebanking.bean;
 
 import com.ofasin.os.ebanking.model.DominioLuma;
+import com.ofasin.os.ebanking.model.DominioAsociacion;
+import com.ofasin.os.ebanking.model.DominioResguardo;
 import com.ofasin.os.ebanking.business.LumaIface;
 import com.ofasin.os.ebanking.bean.modelolazy.modeloLazyLuma;
 import com.ofasin.os.ebanking.globals.Global;
@@ -45,6 +47,9 @@ public class BeanLuma extends BeanGeneric  {
     private DominioLuma luma;
     private LumaIface service;
     private LazyDataModel<DominioLuma> listaModel;
+    private List<DominioAsociacion> listaAsociacon;
+     private List<DominioResguardo> listaResguardo;
+    
     private List<DominioLuma> listaLuma;
     private List<DominioLuma> lista;  
 
@@ -87,6 +92,21 @@ public class BeanLuma extends BeanGeneric  {
     public void setLista(List<DominioLuma> lista) {
         this.lista = lista;
     }
+    public List<DominioAsociacion> getListaAsociacon() {
+        return listaAsociacon;
+    }
+
+    public void setListaAsociacon(List<DominioAsociacion> listaAsociacon) {
+        this.listaAsociacon = listaAsociacon;
+    }
+    
+    public List<DominioResguardo> getListaResguardo() {
+        return listaResguardo;
+    }
+
+    public void setListaResguardo(List<DominioResguardo> listaResguardo) {
+        this.listaResguardo = listaResguardo;
+    }
     
      @PostConstruct
     public void llenaLuma() {
@@ -100,8 +120,16 @@ public class BeanLuma extends BeanGeneric  {
 
     @Override
     public void llenaLista() {
+        
         listaModel = new modeloLazyLuma(getService());
-    setListaModel(listaModel);
+        listaAsociacon= getService().getListaAsociacion();
+        listaResguardo= getService().getListaResguardo();
+        System.out.println("listaAsociacon = "+listaAsociacon.size());
+         System.out.println("listaResguardo = "+listaResguardo.size());
+        setListaModel(listaModel);
+        setListaAsociacon(listaAsociacon);
+        setListaResguardo(listaResguardo);
+        
     }
 
     @Override
@@ -220,4 +248,6 @@ public class BeanLuma extends BeanGeneric  {
         luma = (DominioLuma)event.getObject();
         luma.setDisabled(true);
     }
+
+    
 }
