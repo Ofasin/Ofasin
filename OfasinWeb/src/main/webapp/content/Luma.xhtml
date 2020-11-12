@@ -79,18 +79,20 @@
                                 <p:outputLabel value="Descripcion" for="lumatxt" />
                                 <p:inputText id="lumatxt" required="true" value="#{beanLuma.luma.descrluma}" /> 
                                 <p:outputLabel value="Resguardo" for="cmbResguardo" />
-                                <p:selectOneMenu id="cmbResguardo" value="#{beanLuma.luma.idresguardo}">
-                                    <f:selectItem itemLabel="Seleccione una opción"/>
+                                <p:selectOneMenu id="cmbResguardo" value="#{beanLuma.resguardo.idresguardo}" >
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{beanLuma.listaResguardo}"
                                                    var="resgrd" itemLabel="#{resgrd.descrip}"
-                                                   itemValue="#{resgrd}" />
+                                                   itemValue="#{resgrd.idresguardo}" />
+                                   
                                 </p:selectOneMenu>
                                 <p:outputLabel value="Asociacion" for="cmbAsociacion" />
-                                 <p:selectOneMenu id="cmbAsociacion" value="#{beanLuma.luma.idasociacion}">
-                                    <f:selectItem itemLabel="Seleccione una opción"/>
+                                <p:selectOneMenu id="cmbAsociacion" value="#{beanLuma.luma.idasociacion.idasocicion}">
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{beanLuma.listaAsociacon}"
                                                    var="asoccn" itemLabel="#{asoccn.nombre}"
-                                                   itemValue="#{asoccn}" />
+                                                   itemValue="#{asoccn.idasocicion}" />
+                                    
                                 </p:selectOneMenu>
                                 <p:commandButton id="btnCancelar" value="Cancelar"
                                                  update=":formTableLuma:tablaLuma"

@@ -46,6 +46,9 @@ public class BeanLuma extends BeanGeneric  {
      private final static Logger log = Logger.getLogger(BeanLuma.class);
     private DominioLuma luma;
     private LumaIface service;
+    private DominioAsociacion asociacion;
+
+    private DominioResguardo resguardo;
     private LazyDataModel<DominioLuma> listaModel;
     private List<DominioAsociacion> listaAsociacon;
      private List<DominioResguardo> listaResguardo;
@@ -108,6 +111,23 @@ public class BeanLuma extends BeanGeneric  {
         this.listaResguardo = listaResguardo;
     }
     
+    
+    public DominioAsociacion getAsociacion() {
+        return asociacion;
+    }
+
+    public void setAsociacion(DominioAsociacion asociacion) {
+        this.asociacion = asociacion;
+    }
+
+    public DominioResguardo getResguardo() {
+        return resguardo;
+    }
+
+    public void setResguardo(DominioResguardo resguardo) {
+        this.resguardo = resguardo;
+    }
+    
      @PostConstruct
     public void llenaLuma() {
         try {
@@ -124,8 +144,7 @@ public class BeanLuma extends BeanGeneric  {
         listaModel = new modeloLazyLuma(getService());
         listaAsociacon= getService().getListaAsociacion();
         listaResguardo= getService().getListaResguardo();
-        System.out.println("listaAsociacon = "+listaAsociacon.size());
-         System.out.println("listaResguardo = "+listaResguardo.size());
+        
         setListaModel(listaModel);
         setListaAsociacon(listaAsociacon);
         setListaResguardo(listaResguardo);
@@ -229,12 +248,12 @@ public class BeanLuma extends BeanGeneric  {
             luma = new DominioLuma();
             luma.setPosicion((listaModel.getRowCount()%listaModel.getPageSize()));
         } else {
-            
             setTituloPantalla("Actualizando Registro");
             setShowSave(false);            
             setShowUpdate(true);            
             luma = (DominioLuma)obj;
-             
+            
+            
         }
     }
 
