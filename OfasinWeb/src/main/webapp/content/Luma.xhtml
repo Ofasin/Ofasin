@@ -79,19 +79,13 @@
                                 <p:outputLabel value="Descripcion" for="lumatxt" />
                                 <p:inputText id="lumatxt" required="true" value="#{beanLuma.luma.descrluma}" /> 
                                 <p:outputLabel value="Resguardo" for="cmbResguardo" />
-                                <p:selectOneMenu id="cmbResguardo" value="#{beanLuma.resguardo.idresguardo}" >
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemValue="" noSelectionOption="true"/>
-                                    <f:selectItems value="#{beanLuma.listaResguardo}"
-                                                   var="resgrd" itemLabel="#{resgrd.descrip}"
-                                                   itemValue="#{resgrd.idresguardo}" />
-                                   
-                                </p:selectOneMenu>
+                                
                                 <p:outputLabel value="Asociacion" for="cmbAsociacion" />
-                                <p:selectOneMenu id="cmbAsociacion" value="#{beanLuma.luma.idasociacion.idasocicion}">
+                                <p:selectOneMenu id="cmbAsociacion" value="#{beanLuma.luma.idasociacion}" converter="#{beanConverterAsociacion}">
                                     <f:selectItem itemLabel="Seleccione una opción"  itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{beanLuma.listaAsociacon}"
                                                    var="asoccn" itemLabel="#{asoccn.nombre}"
-                                                   itemValue="#{asoccn.idasocicion}" />
+                                                   itemValue="#{asoccn}" />
                                     
                                 </p:selectOneMenu>
                                 <p:commandButton id="btnCancelar" value="Cancelar"

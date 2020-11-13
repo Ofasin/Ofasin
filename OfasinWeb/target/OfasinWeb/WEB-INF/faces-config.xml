@@ -157,4 +157,12 @@
         <value>#{serviceLuma}</value>
     </managed-property>
 </managed-bean>
+
+<managed-bean>
+    <managed-bean-name>beanConverterAsociacion</managed-bean-name>
+    <managed-bean-class>com.ofasin.os.ebanking.converter.ConverterAsociacion</managed-bean-class>
+
+    <managed-bean-scope>session</managed-bean-scope>
+    
+</managed-bean>
 </faces-config>

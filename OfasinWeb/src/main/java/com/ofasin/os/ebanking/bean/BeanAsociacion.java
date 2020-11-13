@@ -233,4 +233,8 @@ public class BeanAsociacion extends BeanGeneric{
         asociacion.setDisabled(true);
     }
     
+    public DominioAsociacion getById(DominioAsociacion obj) throws Exception {
+        return (DominioAsociacion)service.getById(obj);
+    }
+    
 }
