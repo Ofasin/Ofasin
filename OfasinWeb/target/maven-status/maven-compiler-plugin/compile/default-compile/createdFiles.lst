@@ -26,3 +26,4 @@ com\ofasin\os\ebanking\details\Usuario.class
 com\ofasin\os\ebanking\service\ServiceResguardo.class
 com\ofasin\os\ebanking\bean\BeanResguardo.class
 com\ofasin\os\ebanking\bean\BeanLuma.class
+com\ofasin\os\ebanking\converter\ConverterAsociacion.class

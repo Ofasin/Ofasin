@@ -38,16 +38,25 @@
                 <p:column headerText="Id" >
                     <h:outputText value="#{obj.cont}" />
 		</p:column>
-                <p:column headerText="Descripcion" priority="3" style="width:30%;text-align: left;">
+                <p:column headerText="Descripcion" priority="3" style="width:14%;text-align: left;">
                     <h:outputText value="#{obj.descrluma}" />
                 </p:column>
-                <p:column headerText="Resguardo" priority="3" style="width:30%;text-align: left;">
+                <p:column headerText="Resguardo" priority="3" style="width:22%;text-align: left;">
                     <h:outputText value="#{obj.idresguardo.descrip}" />
                 </p:column>
-                <p:column headerText="Asociacion" priority="3" style="width:30%;text-align: left;">
+                <p:column headerText="Asociacion" priority="3" style="width:22%;text-align: left;">
                     <h:outputText value="#{obj.idasociacion.nombre}" />
                 </p:column>
-                <p:column headerText="" priority="3">
+                <p:column headerText="Fecha Acutaliza" style="width:12%;text-align: left;">
+                    <h:outputText value="#{obj.fecactuliza}" />
+                </p:column>
+                <p:column headerText="Latitud"  style="width:10%;text-align: left;">
+                    <h:outputText value="#{obj.latitud}" />
+                </p:column>
+                <p:column headerText="Longitud"  style="width:10%;text-align: left;">
+                    <h:outputText value="#{obj.longitud}" />
+                </p:column>
+                <p:column headerText="" >
                     <p:commandLink onclick="PF('widgetTablaLuma').unselectAllRows();
                         PF('widgetTablaLuma').selectRow(#{obj.posicion});"
                         actionListener="#{beanLuma.onUpdateInsertRow(obj)}" 
@@ -78,16 +87,32 @@
                                 <h:inputHidden id="contadorLumaActualizar2" value="#{beanLuma.luma.idluma}"/>
                                 <p:outputLabel value="Descripcion" for="lumatxt" />
                                 <p:inputText id="lumatxt" required="true" value="#{beanLuma.luma.descrluma}" /> 
-                                <p:outputLabel value="Resguardo" for="cmbResguardo" />
+                               
                                 
                                 <p:outputLabel value="Asociacion" for="cmbAsociacion" />
-                                <p:selectOneMenu id="cmbAsociacion" value="#{beanLuma.luma.idasociacion}" converter="#{beanConverterAsociacion}">
-                                    <f:selectItem itemLabel="Seleccione una opción"  itemValue="" noSelectionOption="true"/>
+                                <p:selectOneMenu id="cmbAsociacion" value="#{beanLuma.luma.idasociacion.idasocicion}" >
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemValue="" />
                                     <f:selectItems value="#{beanLuma.listaAsociacon}"
                                                    var="asoccn" itemLabel="#{asoccn.nombre}"
-                                                   itemValue="#{asoccn}" />
+                                                   itemValue="#{asoccn.idasocicion}" />
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Resguardo" for="cmbResguardo" />
+                                <p:selectOneMenu id="cmbResguardo" value="#{beanLuma.luma.idresguardo.idresguardo}" >
+                                    <f:selectItem itemLabel="Seleccione una opción"  itemValue="" />
+                                    <f:selectItems value="#{beanLuma.listaResguardo}"
+                                                   var="opcion" itemLabel="#{opcion.descrip}"
+                                                   itemValue="#{opcion.idresguardo}" />
                                     
                                 </p:selectOneMenu>
+                                
+                                
+                                <p:outputLabel value="Fecha Actuliza" for="fecacttxt" />
+                                <p:inputText id="fecacttxt"  value="#{beanLuma.luma.fecactuliza}" /> 
+                                <p:outputLabel value="Latitud" for="latitudttxt" />
+                                <p:inputText id="latitudttxt" value="#{beanLuma.luma.latitud}" /> 
+                                <p:outputLabel value="Longitud" for="longitudttxt" />
+                                <p:inputText id="longitudttxt"  value="#{beanLuma.luma.longitud}" /> 
+                                
                                 <p:commandButton id="btnCancelar" value="Cancelar"
                                                  update=":formTableLuma:tablaLuma"
                                  immediate="true"
