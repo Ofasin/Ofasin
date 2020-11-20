@@ -130,6 +130,11 @@ public class BeanLuma extends BeanGeneric  {
     
      @PostConstruct
     public void llenaLuma() {
+        this.asociacion=new DominioAsociacion();
+        this.resguardo=new DominioResguardo();
+        this.luma=new DominioLuma();
+        this.luma.setIdasociacion(asociacion);
+        this.luma.setIdresguardo(resguardo);
         try {
             setLista(service.getAll());
         } catch(Exception e) {
@@ -242,6 +247,11 @@ public class BeanLuma extends BeanGeneric  {
     @Override
     public void onUpdateInsertRow(Object obj) {
          if(obj == null) {
+            this.asociacion=new DominioAsociacion();
+            this.resguardo=new DominioResguardo();
+            this.luma=new DominioLuma();
+            this.luma.setIdasociacion(asociacion);
+            this.luma.setIdresguardo(resguardo);
             setTituloPantalla("Nuevo Registro");
             setShowSave(true);
             setShowUpdate(false);

@@ -5,7 +5,7 @@
  * Queda totalmente prohibido su uso o divulgación en forma parcial o total.
  * ----------------------------------------------------------------------------
  * Nombre de Aplicacion: Sistema Ofasin
- * Nombre de archivo: BeanTipEducacion.java
+ * Nombre de archivo: BeanAsociacion.java
  * Fecha de creacion : Noviembre, 2020
  * @author : Heidelber Gonzalez Iguaran
  * @version 1.0
