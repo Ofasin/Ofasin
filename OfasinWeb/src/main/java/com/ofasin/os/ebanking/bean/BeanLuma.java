@@ -185,7 +185,7 @@ public class BeanLuma extends BeanGeneric  {
     public void updateRow(ActionEvent ae) {
         setAccion("update");
         try{
-            
+            System.err.println("luma.getDescrluma"+luma.getDescrluma()); 
         DominioLuma obj = (DominioLuma)service.actualizar(luma);
         if(obj.isStatus()) {
             Global.addMsg("Registro Actualizado", "El registro :'"+luma.getCont()+"'\n se actualizo correctamente");
@@ -255,7 +255,7 @@ public class BeanLuma extends BeanGeneric  {
             setTituloPantalla("Nuevo Registro");
             setShowSave(true);
             setShowUpdate(false);
-            luma = new DominioLuma();
+            
             luma.setPosicion((listaModel.getRowCount()%listaModel.getPageSize()));
         } else {
             setTituloPantalla("Actualizando Registro");
