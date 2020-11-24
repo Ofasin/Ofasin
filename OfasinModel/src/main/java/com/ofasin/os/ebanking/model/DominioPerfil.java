@@ -15,7 +15,7 @@ import java.util.List;
  * @author FAGONFER
  */
 
-public class DominioPerfil implements Serializable {
+public class DominioPerfil  extends DominioGeneric  {
 
     private static final long serialVersionUID = 1L;
     
@@ -29,6 +29,15 @@ public class DominioPerfil implements Serializable {
     private String obs;
     private List<DominioPresupuesto> presupuestoList;
     private DominioLuma idluma;
+    private byte[] archivo;
+
+    public byte[] getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(byte[] archivo) {
+        this.archivo = archivo;
+    }
 
     public DominioPerfil() {
     }
