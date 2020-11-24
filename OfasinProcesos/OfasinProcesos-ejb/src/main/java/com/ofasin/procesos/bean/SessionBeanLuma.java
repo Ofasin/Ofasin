@@ -202,6 +202,22 @@ public class SessionBeanLuma implements LumaIface{
          Luma entity;
         try {
             entity = em.find(Luma.class, obj.getIdluma());
+            
+            DominioAsociacion asociacion = new DominioAsociacion();
+            DominioResguardo resguardo = new DominioResguardo();
+            if (obj.getIdasociacion() != null) {
+
+                asociacion.setIdasocicion(obj.getIdasociacion().getIdasocicion());
+                asociacion.setBarrio(obj.getIdasociacion().getBarrio());
+                asociacion.setDireccion(obj.getIdasociacion().getDireccion());
+                asociacion.setNombre(obj.getIdasociacion().getNombre());
+            }
+            if (obj.getIdresguardo() != null) {
+
+                resguardo.setIdresguardo(obj.getIdresguardo().getIdresguardo());
+                resguardo.setDescrip(obj.getIdresguardo().getDescrip());
+            }
+            
            obj.setIdluma(entity.getIdluma());
            obj.setDescrluma(entity.getDescrluma());
            obj.setFecactuliza(entity.getFecactuliza());
@@ -254,14 +270,7 @@ public class SessionBeanLuma implements LumaIface{
          Resguardo entityResguardo = new Resguardo();
          
         try{
-            if(obj.getIdasociacion()!=null){
-            entityAsociacion.setIdasocicion(obj.getIdasociacion().getIdasocicion());
-            entityLuma.setIdasociacion(entityAsociacion);
-            }
-            if(obj.getIdresguardo()!=null){
-                 entityResguardo.setIdresguardo(obj.getIdresguardo().getIdresguardo());
-                entityLuma.setIdresguardo(entityResguardo);
-            }
+            
         
        
         entityLuma = em.find(Luma.class, obj.getIdluma());
@@ -270,14 +279,22 @@ public class SessionBeanLuma implements LumaIface{
         entityLuma.setLatitud(obj.getLatitud());
         entityLuma.setLongitud(obj.getLongitud());
         
-        
+        if(obj.getIdasociacion()!=null){
+            entityAsociacion.setIdasocicion(obj.getIdasociacion().getIdasocicion());
+            obj.setMsg("entityAsociacion.setIdasocicion = "+entityAsociacion.getIdasocicion()+"\n");
+            entityLuma.setIdasociacion(entityAsociacion);
+            }
+            if(obj.getIdresguardo()!=null){
+                 entityResguardo.setIdresguardo(obj.getIdresguardo().getIdresguardo());
+                 obj.setMsg("entityResguardo.setIdresguardo = "+entityResguardo.getIdresguardo()+"\n"); 
+                entityLuma.setIdresguardo(entityResguardo);
+            }
         
         em.merge(entityLuma);
         obj.setIdluma(entityLuma.getIdluma());
         obj.setDescrluma(entityLuma.getDescrluma());
         obj.setStatus(true);
-        obj.setMsg("Registro Actualizado Exitosamente");
-        
+               
         } catch(Exception e) {
             obj.setMsg("Error de Transaccion : \n"+e);
             obj.setStatus(false);
