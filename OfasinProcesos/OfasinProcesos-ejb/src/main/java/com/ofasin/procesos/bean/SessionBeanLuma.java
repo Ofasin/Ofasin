@@ -12,6 +12,7 @@ import com.ofasin.os.ebanking.model.DominioResguardo;
 import com.ofasin.os.ebanking.model.DominioAsociacion;
 import com.ofasin.procesos.entities.Asociacion;
 import com.ofasin.procesos.entities.Resguardo;
+import com.ofasin.os.ebanking.model.DominioUsers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -83,7 +84,7 @@ public class SessionBeanLuma implements LumaIface{
     }
 
     @Override
-    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters) {
+    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters, DominioUsers user) {
         List<Luma> entityLuma = new ArrayList<>();
         List<DominioLuma> listaDominio = new ArrayList<>();
         
@@ -112,7 +113,13 @@ public class SessionBeanLuma implements LumaIface{
                     
                 } 
             }
+            
+            if(user.getIdroll().getNombre().equalsIgnoreCase("ROLE_LIDER")){
+            criteria.createAlias("", "");
+            }
             criteria.addOrder(Order.asc("idluma"));
+            
+            
              entityLuma=criteria.list();
         
             int cont = first+1;
