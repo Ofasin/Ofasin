@@ -20,6 +20,7 @@ package com.ofasin.os.ebanking.business;
 import com.ofasin.os.ebanking.model.DominioLuma;
 import com.ofasin.os.ebanking.model.DominioAsociacion;
 import com.ofasin.os.ebanking.model.DominioResguardo;
+import com.ofasin.os.ebanking.model.DominioUsers;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,7 @@ import javax.ejb.Remote;
 @Remote
 public interface LumaIface {
     List<DominioLuma> getAll() throws Exception;
-    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters) ;
+    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters,DominioUsers user) ;
     public List<DominioAsociacion> getListaAsociacion();
     public List<DominioResguardo> getListaResguardo();
     public int rowCount(Map<String, Object> filters) ;
