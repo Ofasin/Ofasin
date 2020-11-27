@@ -20,6 +20,7 @@
 package com.ofasin.os.ebanking.service;
 
 import com.ofasin.os.ebanking.model.DominioLuma;
+import com.ofasin.os.ebanking.model.DominioUsers;
 import com.ofasin.os.ebanking.business.LumaIface;
 import com.ofasin.os.ebanking.model.DominioAsociacion;
 import com.ofasin.os.ebanking.model.DominioResguardo;
@@ -44,7 +45,7 @@ public class ServiceLuma implements LumaIface{
     }
 
     @Override
-    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters) {
+    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters,DominioUsers user) {
         try {
             ejb = (LumaIface)Utilidades.getEJBRemote("ejbLuma", LumaIface.class.getName());
                        
@@ -52,7 +53,7 @@ public class ServiceLuma implements LumaIface{
             Logger.getLogger(ServiceLuma.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return ejb.getListaPagination(first,pageSize, filters );
+        return ejb.getListaPagination(first,pageSize, filters,user );
     }
 
     @Override

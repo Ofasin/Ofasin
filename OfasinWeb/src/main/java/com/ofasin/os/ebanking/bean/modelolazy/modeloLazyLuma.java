@@ -22,23 +22,29 @@ package com.ofasin.os.ebanking.bean.modelolazy;
 import java.io.Serializable;
 import org.primefaces.model.LazyDataModel;
 import com.ofasin.os.ebanking.model.DominioLuma;
+import com.ofasin.os.ebanking.model.DominioUsers;
 import com.ofasin.os.ebanking.business.LumaIface;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import org.primefaces.model.SortOrder;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private List<DominioLuma> datasource;
     private LumaIface service1;
-    
+    private DominioUsers user;
     
     public modeloLazyLuma(LumaIface service) {
         this.service1=service;
     }
+    
+   
     
     public modeloLazyLuma(List<DominioLuma> datasource) {
         this.datasource = datasource;
@@ -68,8 +74,12 @@ public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serial
             
           
         try {
+            ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            DominioUsers user = new DominioUsers();
+            user =(DominioUsers) session.getAttribute("userInSession");
             
-            this.datasource= this.service1.getListaPagination(first,pageSize,filters);
+            this.datasource= this.service1.getListaPagination(first,pageSize,filters,user);
             
         } catch (Exception ex) {
             Logger.getLogger(modeloLazyLuma.class.getName()).log(Level.SEVERE, null, ex);

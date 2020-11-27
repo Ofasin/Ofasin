@@ -5,8 +5,8 @@
  * Queda totalmente prohibido su uso o divulgación en forma parcial o total.
  * ----------------------------------------------------------------------------
  * Nombre de Aplicacion: Sistema Ofasin
- * Nombre de archivo: ServiceResguardo.java
- * Fecha de creacion : Octubre, 2020
+ * Nombre de archivo: ServicePerfil.java
+ * Fecha de creacion : Noviembre, 2020
  * @author : Heidelber Gonzalez Iguaran
  * @version 1.0
  *
@@ -14,11 +14,11 @@
  * CR/Defecto 		Fecha 			Autor 			Descripción del cambio
  * ----------------------------------------------------------------------------
 **/ 
-
 package com.ofasin.os.ebanking.service;
 
-import com.ofasin.os.ebanking.model.DominioResguardo;
-import com.ofasin.os.ebanking.business.ResguardoIface;
+import com.ofasin.os.ebanking.model.DominioPerfil;
+import com.ofasin.os.ebanking.business.PerfilIface;
+
 import com.ofasin.os.ebanking.utils.Utilidades;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,28 +27,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
 
-
 /**
  *
  * @author Heidelber Gonzalez Iguaran
  */
 
 @Service
-public class ServiceResguardo implements ResguardoIface{
+public class ServicePerfil implements PerfilIface{
+PerfilIface ejb;
 
-    ResguardoIface ejb;
-    
     @Override
-    public List<DominioResguardo> getAll() throws Exception {
-        ejb = (ResguardoIface)Utilidades.getEJBRemote("ejbResguardo", ResguardoIface.class.getName());
+    public List<DominioPerfil> getAll() throws Exception {
+     ejb = (PerfilIface)Utilidades.getEJBRemote("ejbPerfil", PerfilIface.class.getName());
         
         return ejb.getAll();
     }
 
     @Override
-    public List<DominioResguardo> getListaPagination(int first, int pageSize, Map<String, Object> filters) {
+    public List<DominioPerfil> getListaPagination(int first, int pageSize, Map<String, Object> filters) {
+      
         try {
-            ejb = (ResguardoIface)Utilidades.getEJBRemote("ejbResguardo", ResguardoIface.class.getName());
+            ejb = (PerfilIface)Utilidades.getEJBRemote("ejbPerfil", PerfilIface.class.getName());
         } catch (Exception ex) {
             Logger.getLogger(ServiceResguardo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,8 +57,8 @@ public class ServiceResguardo implements ResguardoIface{
 
     @Override
     public int rowCount(Map<String, Object> filters) {
-       try {
-            ejb = (ResguardoIface)Utilidades.getEJBRemote("ejbResguardo", ResguardoIface.class.getName());
+        try {
+            ejb = (PerfilIface)Utilidades.getEJBRemote("ejbPerfil", PerfilIface.class.getName());
         } catch (Exception ex) {
             Logger.getLogger(ServiceResguardo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -67,9 +66,9 @@ public class ServiceResguardo implements ResguardoIface{
     }
 
     @Override
-    public DominioResguardo getById(DominioResguardo obj) throws Exception {
+    public DominioPerfil getById(DominioPerfil obj) throws Exception {
          try {
-            ejb = (ResguardoIface)Utilidades.getEJBRemote("ejbResguardo", ResguardoIface.class.getName());
+            ejb = (PerfilIface)Utilidades.getEJBRemote("ejbPerfil", PerfilIface.class.getName());
         } catch (Exception ex) {
             Logger.getLogger(ServiceResguardo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,9 +76,9 @@ public class ServiceResguardo implements ResguardoIface{
     }
 
     @Override
-    public DominioResguardo guardar(DominioResguardo obj) throws Exception {
+    public DominioPerfil guardar(DominioPerfil obj) throws Exception {
          try {
-            ejb = (ResguardoIface)Utilidades.getEJBRemote("ejbResguardo", ResguardoIface.class.getName());
+            ejb = (PerfilIface)Utilidades.getEJBRemote("ejbPerfil", PerfilIface.class.getName());
         } catch (Exception ex) {
             Logger.getLogger(ServiceResguardo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -87,9 +86,9 @@ public class ServiceResguardo implements ResguardoIface{
     }
 
     @Override
-    public DominioResguardo actualizar(DominioResguardo obj) throws Exception {
-       try {
-            ejb = (ResguardoIface)Utilidades.getEJBRemote("ejbResguardo", ResguardoIface.class.getName());
+    public DominioPerfil actualizar(DominioPerfil obj) throws Exception {
+         try {
+            ejb = (PerfilIface)Utilidades.getEJBRemote("ejbPerfil", PerfilIface.class.getName());
         } catch (Exception ex) {
             Logger.getLogger(ServiceResguardo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,9 +96,9 @@ public class ServiceResguardo implements ResguardoIface{
     }
 
     @Override
-    public DominioResguardo borrar(DominioResguardo obj) throws Exception {
-         try {
-            ejb = (ResguardoIface)Utilidades.getEJBRemote("ejbResguardo", ResguardoIface.class.getName());
+    public DominioPerfil borrar(DominioPerfil obj) throws Exception {
+       try {
+            ejb = (PerfilIface)Utilidades.getEJBRemote("ejbPerfil", PerfilIface.class.getName());
         } catch (Exception ex) {
             Logger.getLogger(ServiceResguardo.class.getName()).log(Level.SEVERE, null, ex);
         }
