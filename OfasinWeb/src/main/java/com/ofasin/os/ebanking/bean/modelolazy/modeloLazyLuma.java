@@ -39,12 +39,33 @@ public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serial
     private List<DominioLuma> datasource;
     private LumaIface service1;
     private DominioUsers user;
+    Boolean pSt1= false;
+    Boolean pSt2= false;
+    Boolean pSt3= false;
+    Object objStr1;
+    Object objStr2;
+    Object objStr3;
     
     public modeloLazyLuma(LumaIface service) {
         this.service1=service;
     }
     
-   
+   public modeloLazyLuma(LumaIface service, String p1,String p2, String p3) {
+       if(!p1.isEmpty()) {
+       pSt1= true;
+        objStr1=p1;
+       }
+       if(!p2.isEmpty()) {
+       pSt1= true;
+        objStr2=p2;
+       }
+       if(!p3.isEmpty()) {
+       pSt1= true;
+        objStr3=p3;
+       }
+        this.service1=service;
+    }
+    
     
     public modeloLazyLuma(List<DominioLuma> datasource) {
         this.datasource = datasource;
@@ -78,7 +99,12 @@ public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serial
             HttpSession session = attr.getRequest().getSession(true);
             DominioUsers user = new DominioUsers();
             user =(DominioUsers) session.getAttribute("userInSession");
-            
+            if(pSt1)
+            filters.put("descrluma", objStr1);
+            if(pSt2)
+            filters.put("idasociacion", objStr2);
+            if(pSt3)
+            filters.put("idresguardo", objStr3);
             this.datasource= this.service1.getListaPagination(first,pageSize,filters,user);
             
         } catch (Exception ex) {
