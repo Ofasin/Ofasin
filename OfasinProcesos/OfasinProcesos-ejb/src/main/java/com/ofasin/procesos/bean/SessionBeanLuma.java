@@ -102,19 +102,33 @@ public class SessionBeanLuma implements LumaIface{
                 
                 Iterator it = filtrs.entrySet().iterator(); 
                 while (it.hasNext()) { 
-                    Map.Entry e = (Map.Entry)it.next(); 
-                    key=(String) e.getKey();
-                    vlr=(String) e.getValue();
-                    if (vlr instanceof String) {
-			criteria.add(Restrictions.ilike(key,  vlr, MatchMode.ANYWHERE));
-                    } else {
-			criteria.add(Restrictions.eq(key, vlr));
-                    }
+                    Map.Entry e = (Map.Entry) it.next();
+                    key = (String) e.getKey();
+                    vlr = (String) e.getValue();
+                    if(  key.equalsIgnoreCase("idasociacion") || !key.equalsIgnoreCase("idresguardo")){
+                        
                     
+                    if (key.equalsIgnoreCase("idresguardo")) {
+                            criteria.createAlias("idresguardo", "resg")
+                                    .add( Restrictions.eq("resg.idresguardo", vlr) );
+                        }
+                    
+                    if (key.equalsIgnoreCase("idasociacion")) {
+                            criteria.createAlias("idasociacion", "asoc")
+                                    .add( Restrictions.eq("asoc.idasociacion", vlr) );
+                        }
+                    
+                    } else {
+                                if (vlr instanceof String) {
+                                    criteria.add(Restrictions.ilike(key, vlr, MatchMode.ANYWHERE));
+                                } else {
+                                    criteria.add(Restrictions.eq(key, vlr));
+                                }
+                            }    
                 } 
             }
             
-            if(user.getIdroll().getNombre().equalsIgnoreCase("ROLE_LIDER")){
+            if(!user.getIdroll().getNombre().equalsIgnoreCase("ROLE_ADMIN")){
             criteria.createAlias("", "");
             }
             criteria.addOrder(Order.asc("idluma"));
