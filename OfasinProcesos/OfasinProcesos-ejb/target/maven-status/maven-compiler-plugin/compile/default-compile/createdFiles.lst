@@ -22,6 +22,7 @@ com\ofasin\procesos\entities\Municipios_.class
 com\ofasin\procesos\entities\Imagenes_.class
 com\ofasin\procesos\bean\SessionBeanTipEducacion.class
 com\ofasin\procesos\entities\TipOcupacion_.class
+com\ofasin\procesos\bean\SessionBeanPerfil.class
 com\ofasin\procesos\entities\TipEducacion_.class
 com\ofasin\procesos\entities\TipEducacion.class
 com\ofasin\procesos\bean\SessionUsersLog.class

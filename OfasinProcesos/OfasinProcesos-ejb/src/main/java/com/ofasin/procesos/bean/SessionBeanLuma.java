@@ -106,13 +106,10 @@ public class SessionBeanLuma implements LumaIface{
                     key = (String) e.getKey();
                     vlr = (String) e.getValue();
                     if(  key.equalsIgnoreCase("idasociacion") || !key.equalsIgnoreCase("idresguardo")){
-                        
-                    
                     if (key.equalsIgnoreCase("idresguardo")) {
                             criteria.createAlias("idresguardo", "resg")
                                     .add( Restrictions.eq("resg.idresguardo", vlr) );
                         }
-                    
                     if (key.equalsIgnoreCase("idasociacion")) {
                             criteria.createAlias("idasociacion", "asoc")
                                     .add( Restrictions.eq("asoc.idasociacion", vlr) );
@@ -127,10 +124,16 @@ public class SessionBeanLuma implements LumaIface{
                             }    
                 } 
             }
+            if(user!=null){
+             if(!user.getIdroll().getNombre().equalsIgnoreCase("ROLE_ADMIN") || !user.getIdroll().getNombre().equalsIgnoreCase("ROLE_USER")){
+                
+            criteria.createAlias("wayuuList", "wayuu")
+            .createAlias("wayuu.usersList", "user")
+            .add( Restrictions.eq("user.iduser", user.getIduser() ));
             
-            if(!user.getIdroll().getNombre().equalsIgnoreCase("ROLE_ADMIN")){
-            criteria.createAlias("", "");
             }
+            }
+           
             criteria.addOrder(Order.asc("idluma"));
             
             
