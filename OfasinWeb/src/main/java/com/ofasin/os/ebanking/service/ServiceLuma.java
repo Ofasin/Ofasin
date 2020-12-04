@@ -37,6 +37,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceLuma implements LumaIface{
     LumaIface ejb;
+    int counRow=0;
 
     @Override
     public List<DominioLuma> getAll() throws Exception {
@@ -52,7 +53,7 @@ public class ServiceLuma implements LumaIface{
         } catch (Exception ex) {
             Logger.getLogger(ServiceLuma.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        counRow=ejb.getListaPagination(first,pageSize, filters,user ).size();
         return ejb.getListaPagination(first,pageSize, filters,user );
     }
 
@@ -63,7 +64,7 @@ public class ServiceLuma implements LumaIface{
         } catch (Exception ex) {
             Logger.getLogger(ServiceLuma.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return ejb.rowCount(filters);
+        return counRow;    //ejb.rowCount(filters);
     }
 
     @Override

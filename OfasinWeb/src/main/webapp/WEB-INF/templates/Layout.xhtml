@@ -22,6 +22,7 @@
         
         <ui:param name="resources" value="#{request.getContextPath()}/resources"/>
         <ui:param name="usuario" value="#{session.getAttribute('userInSession')}"/> 
+        
          <ui:insert name="icon"><link rel="shortcut icon"  href="#{request.contextPath}/resources/images/icons/login1.png" /></ui:insert>  
           <link href="#{request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet"/> 
           
@@ -31,7 +32,7 @@
 
 	<header class="aw-topbar">
 		<h:graphicImage library="images" name="logo.png"  width="200" height="65"/>
-		
+                <h:outputLabel value="hola tu ${usuario.getIduser()} ${usuario.getIdusuario().getPrnombre()}."></h:outputLabel>
 		<a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"></i></a>
 	</header>
 	

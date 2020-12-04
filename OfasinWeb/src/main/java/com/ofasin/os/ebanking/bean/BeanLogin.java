@@ -3,10 +3,19 @@ package com.ofasin.os.ebanking.bean;
 import com.ofasin.os.ebanking.details.Usuario;
 import com.ofasin.os.ebanking.model.DominioUsers;
 import com.ofasin.os.ebanking.business.UsersLoginIface;
+import com.ofasin.os.ebanking.globals.Global;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.context.FacesContext;
+
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.primefaces.PrimeFaces;
+import org.primefaces.context.PrimeRequestContext;
+
+
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -91,10 +100,22 @@ public class BeanLogin implements AuthenticationProvider {
             menu.setUser(user);
             menu.setVisibleMenu(true);
             menu.setDisInicio(true);
+            HttpServletRequest request = Global.getRequest(); 
+            
+            //PrimeRequestContext.getCurrentInstance().getCallbackParams().put("userInSession", user);
+            
+            PrimeFaces.current().ajax().addCallbackParam("userInSession", user);
+            
+            
+            //RequestContext reqCtx = RequestContext.getCurrentInstance();        
+            //reqCtx.addCallbackParam("userInSession", user);
+            
             ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
             session.setAttribute("beanMenu", menu);
-            session.setAttribute("userInSession", user);
+             
+           // session.setAttribute("userInSession", user);
+            //request.getSession().setAttribute("userInSession", user);
             return customAuthentication;
         } else {
             System.out.println("Usuario o Contraseña Inválidos.");

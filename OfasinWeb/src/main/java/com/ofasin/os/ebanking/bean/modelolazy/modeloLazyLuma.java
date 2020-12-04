@@ -24,11 +24,13 @@ import org.primefaces.model.LazyDataModel;
 import com.ofasin.os.ebanking.model.DominioLuma;
 import com.ofasin.os.ebanking.model.DominioUsers;
 import com.ofasin.os.ebanking.business.LumaIface;
+import com.ofasin.os.ebanking.globals.Global;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.model.SortOrder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -95,16 +97,20 @@ public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serial
             
           
         try {
-            ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession(true);
+            HttpServletRequest request = Global.getRequest();
+            //ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
+            //HttpSession session = attr.getRequest().getSession(true);
             DominioUsers user = new DominioUsers();
-            user =(DominioUsers) session.getAttribute("userInSession");
+            //user =(DominioUsers) session.getAttribute("userInSession");
+            user = (DominioUsers)request.getSession().getAttribute("userInSession");
             if(pSt1)
             filters.put("descrluma", objStr1);
             if(pSt2)
             filters.put("idasociacion", objStr2);
             if(pSt3)
             filters.put("idresguardo", objStr3);
+            
+            System.err.println("UserEnModeloLazyLuma : "+user.getIdusuario());
             this.datasource= this.service1.getListaPagination(first,pageSize,filters,user);
             
         } catch (Exception ex) {
