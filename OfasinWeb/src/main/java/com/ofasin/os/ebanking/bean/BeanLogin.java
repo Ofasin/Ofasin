@@ -100,11 +100,11 @@ public class BeanLogin implements AuthenticationProvider {
             menu.setUser(user);
             menu.setVisibleMenu(true);
             menu.setDisInicio(true);
-            HttpServletRequest request = Global.getRequest(); 
+            //HttpServletRequest request = Global.getRequest(); 
             
             //PrimeRequestContext.getCurrentInstance().getCallbackParams().put("userInSession", user);
             
-            PrimeFaces.current().ajax().addCallbackParam("userInSession", user);
+            //PrimeFaces.current().ajax().addCallbackParam("userInSession", user.toString());
             
             
             //RequestContext reqCtx = RequestContext.getCurrentInstance();        
@@ -114,7 +114,12 @@ public class BeanLogin implements AuthenticationProvider {
             HttpSession session = attr.getRequest().getSession(true);
             session.setAttribute("beanMenu", menu);
              
-           // session.setAttribute("userInSession", user);
+           session.setAttribute("userInSession", user);
+           user=null;
+           
+           user =(DominioUsers)session.getAttribute("userInSession");
+            System.err.println("P1 en beanlogin");
+            System.err.println(user.getUser());
             //request.getSession().setAttribute("userInSession", user);
             return customAuthentication;
         } else {

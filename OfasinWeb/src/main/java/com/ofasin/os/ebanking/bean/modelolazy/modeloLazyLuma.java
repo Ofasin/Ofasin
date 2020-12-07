@@ -97,12 +97,12 @@ public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serial
             
           
         try {
-            HttpServletRequest request = Global.getRequest();
-            //ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
-            //HttpSession session = attr.getRequest().getSession(true);
+            //HttpServletRequest request = Global.getRequest();
+            ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
             DominioUsers user = new DominioUsers();
-            //user =(DominioUsers) session.getAttribute("userInSession");
-            user = (DominioUsers)request.getSession().getAttribute("userInSession");
+            user =(DominioUsers)session.getAttribute("userInSession");
+            //user = (DominioUsers)request.getSession().getAttribute("userInSession");
             if(pSt1)
             filters.put("descrluma", objStr1);
             if(pSt2)
@@ -110,7 +110,9 @@ public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serial
             if(pSt3)
             filters.put("idresguardo", objStr3);
             
-            System.err.println("UserEnModeloLazyLuma : "+user.getIdusuario());
+            System.err.println("UserEnModeloLazyLuma : "+user.getUser());
+            System.err.println("PasswordEnModeloLazyLuma : "+user.getPassword());
+            
             this.datasource= this.service1.getListaPagination(first,pageSize,filters,user);
             
         } catch (Exception ex) {

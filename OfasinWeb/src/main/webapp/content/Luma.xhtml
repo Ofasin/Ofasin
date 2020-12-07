@@ -13,7 +13,20 @@
           <h:form id="formTableLuma">
             <p:growl id="messages" showDetail="true" showSummary="true"/>
             <p:toolbar>
+                
                 <p:toolbarGroup align="right">
+                    <p:toolbarGroup align="left">
+                    
+                     <p:panelGrid columns="6" id="painel" style="width: 100%; margin-top: 20px"
+	    			columnClasses="rotulo, campo">
+	    		<p:outputLabel value="Vendedor" />
+	    		<p:inputText size="40" value="#{pesquisaPedidosBean.filtro.nomeVendedor}" />
+	    		
+	    		<p:outputLabel value="Cliente" />
+	    		<p:inputText size="40" value="#{pesquisaPedidosBean.filtro.nomeCliente}" />
+	    	</p:panelGrid>
+                    
+                </p:toolbarGroup>
 		    <p:commandButton value="Nuevo" icon="ui-icon-document"
                                      actionListener="#{beanLuma.onUpdateInsertRow(null)}" 
                         update=":formAAShowLuma:dialogLuma"
@@ -23,7 +36,7 @@
 		</p:commandButton>
 		</p:toolbarGroup>
             </p:toolbar>
-            <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+            <p:panelGrid columns="6" id="painel" style="width: 100%; margin-top: 20px"
 	    			columnClasses="rotulo, campo">
 	    		<p:outputLabel value="Número" />
 	    		<h:panelGroup>
@@ -41,13 +54,9 @@
 	    				value="#{pesquisaPedidosBean.filtro.dataCriacaoAte}" />
 	    		</h:panelGroup>
 	    		
-	    		<p:outputLabel value="Vendedor" />
-	    		<p:inputText size="40" value="#{pesquisaPedidosBean.filtro.nomeVendedor}" />
 	    		
-	    		<p:outputLabel value="Cliente" />
-	    		<p:inputText size="40" value="#{pesquisaPedidosBean.filtro.nomeCliente}" />
 	    		
-	    		<p:outputLabel value="Status" />
+	    		
 	    		
 	    	</p:panelGrid>
             
