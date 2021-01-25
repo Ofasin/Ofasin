@@ -26,7 +26,8 @@ public class DominioLuma extends DominioGeneric {
     private DominioResguardo idresguardo;
     private List<DominioPerfil> perfilList;
     private List<DominioWayuu> wayuuList;
-
+    private DominioUsers user;
+    
     public DominioLuma() {
     }
 
@@ -107,30 +108,17 @@ public class DominioLuma extends DominioGeneric {
     public void setWayuuList(List<DominioWayuu> wayuuList) {
         this.wayuuList = wayuuList;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idluma != null ? idluma.hashCode() : 0);
-        return hash;
+    
+     public DominioUsers getUser() {
+        return user;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DominioLuma)) {
-            return false;
-        }
-        DominioLuma other = (DominioLuma) object;
-        if ((this.idluma == null && other.idluma != null) || (this.idluma != null && !this.idluma.equals(other.idluma))) {
-            return false;
-        }
-        return true;
+    public void setUser(DominioUsers user) {
+        this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "folder.Luma[ idluma=" + idluma + " ]";
-    }
+    
+
+   
     
 }
