@@ -34,7 +34,7 @@ import javax.ejb.Remote;
 @Remote
 public interface LumaIface {
     List<DominioLuma> getAll() throws Exception;
-    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters,DominioUsers user) ;
+    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters,DominioLuma user) ;
     public List<DominioAsociacion> getListaAsociacion();
     public List<DominioResguardo> getListaResguardo();
     public int rowCount(Map<String, Object> filters) ;
