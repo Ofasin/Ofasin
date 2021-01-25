@@ -135,6 +135,10 @@ public class BeanLuma extends BeanGeneric  {
         this.luma=new DominioLuma();
         this.luma.setIdasociacion(asociacion);
         this.luma.setIdresguardo(resguardo);
+        this.listaAsociacon= service.getListaAsociacion();
+        this.listaResguardo= service.getListaResguardo();
+        setListaAsociacon(listaAsociacon);
+        setListaResguardo(listaResguardo);
         try {
             setLista(service.getAll());
         } catch(Exception e) {
@@ -146,14 +150,12 @@ public class BeanLuma extends BeanGeneric  {
     @Override
     public void llenaLista() {
         
-        listaModel = new modeloLazyLuma(getService());
-        listaAsociacon= getService().getListaAsociacion();
-        listaResguardo= getService().getListaResguardo();
+        listaModel = new modeloLazyLuma(getService(),luma);
+        
         
         setListaModel(listaModel);
-        setListaAsociacon(listaAsociacon);
-        setListaResguardo(listaResguardo);
         
+        System.out.println("Ejecutando : com.ofasin.os.ebanking.bean.BeanLuma.llenaLista()");
     }
 
     @Override
@@ -255,16 +257,15 @@ public class BeanLuma extends BeanGeneric  {
             setTituloPantalla("Nuevo Registro");
             setShowSave(true);
             setShowUpdate(false);
-            
             luma.setPosicion((listaModel.getRowCount()%listaModel.getPageSize()));
+            
         } else {
             setTituloPantalla("Actualizando Registro");
             setShowSave(false);            
             setShowUpdate(true);            
             luma = (DominioLuma)obj;
-            
-            
         }
+       //  Global.addRedir("RegistroLuma.faces");
     }
 
     @Override

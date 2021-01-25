@@ -39,6 +39,7 @@ public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serial
     private static final long serialVersionUID = 1L;
 
     private List<DominioLuma> datasource;
+    DominioLuma objAux;
     private LumaIface service1;
     private DominioUsers user;
     Boolean pSt1= false;
@@ -48,26 +49,10 @@ public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serial
     Object objStr2;
     Object objStr3;
     
-    public modeloLazyLuma(LumaIface service) {
+    public modeloLazyLuma(LumaIface service,DominioLuma obj) {
         this.service1=service;
+        this.objAux=obj;
     }
-    
-   public modeloLazyLuma(LumaIface service, String p1,String p2, String p3) {
-       if(!p1.isEmpty()) {
-       pSt1= true;
-        objStr1=p1;
-       }
-       if(!p2.isEmpty()) {
-       pSt1= true;
-        objStr2=p2;
-       }
-       if(!p3.isEmpty()) {
-       pSt1= true;
-        objStr3=p3;
-       }
-        this.service1=service;
-    }
-    
     
     public modeloLazyLuma(List<DominioLuma> datasource) {
         this.datasource = datasource;
@@ -102,18 +87,12 @@ public class modeloLazyLuma extends LazyDataModel<DominioLuma> implements Serial
             HttpSession session = attr.getRequest().getSession(true);
             DominioUsers user = new DominioUsers();
             user =(DominioUsers)session.getAttribute("userInSession");
-            //user = (DominioUsers)request.getSession().getAttribute("userInSession");
-            if(pSt1)
-            filters.put("descrluma", objStr1);
-            if(pSt2)
-            filters.put("idasociacion", objStr2);
-            if(pSt3)
-            filters.put("idresguardo", objStr3);
-            
-            System.err.println("UserEnModeloLazyLuma : "+user.getUser());
-            System.err.println("PasswordEnModeloLazyLuma : "+user.getPassword());
-            
-            this.datasource= this.service1.getListaPagination(first,pageSize,filters,user);
+            objAux.setUser(user);
+            System.err.println("objAuxIdUserEnModeloLazyLuma : "+objAux.getUser().getIduser());
+            System.err.println("objAuxUserEnModeloLazyLuma : "+objAux.getUser().getUser());
+            System.err.println("objAuxPasswordEnModeloLazyLuma : "+objAux.getUser().getPassword());
+            System.err.println("objAuxIdrollEnModeloLazyLuma : "+objAux.getUser().getIdroll().getNombre());
+            this.datasource= this.service1.getListaPagination(first,pageSize,filters,objAux);
             
         } catch (Exception ex) {
             Logger.getLogger(modeloLazyLuma.class.getName()).log(Level.SEVERE, null, ex);

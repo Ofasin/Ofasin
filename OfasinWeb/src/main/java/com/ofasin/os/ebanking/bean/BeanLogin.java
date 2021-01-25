@@ -61,8 +61,12 @@ public class BeanLogin implements AuthenticationProvider {
     public boolean userExist(DominioUsers user) {
         try {
             user = getServiceLogin().Login(user);
-            if(user.isStatus()) {
+            if (user.isStatus()) {
                 setRoll(user.getIdroll().getNombre());
+                ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                HttpSession session = attr.getRequest().getSession(true);
+                session.setAttribute("userInSession", user);
+                
                 return true;
             } else {
                 return false;
@@ -110,16 +114,7 @@ public class BeanLogin implements AuthenticationProvider {
             //RequestContext reqCtx = RequestContext.getCurrentInstance();        
             //reqCtx.addCallbackParam("userInSession", user);
             
-            ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("beanMenu", menu);
-             
-           session.setAttribute("userInSession", user);
-           user=null;
-           
-           user =(DominioUsers)session.getAttribute("userInSession");
-            System.err.println("P1 en beanlogin");
-            System.err.println(user.getUser());
+            
             //request.getSession().setAttribute("userInSession", user);
             return customAuthentication;
         } else {

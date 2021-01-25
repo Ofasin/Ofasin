@@ -44,17 +44,21 @@ public class ServiceLuma implements LumaIface{
         ejb = (LumaIface)Utilidades.getEJBRemote("ejbLuma", LumaIface.class.getName());
         return ejb.getAll();
     }
+    
 
     @Override
-    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters,DominioUsers user) {
+    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters,DominioLuma obj) {
+        List<DominioLuma> t1 = new ArrayList<>();
         try {
             ejb = (LumaIface)Utilidades.getEJBRemote("ejbLuma", LumaIface.class.getName());
+            t1=ejb.getListaPagination(first,pageSize, filters,obj );
+        //System.err.println("EnServiceLuma : "+t1.get(0).getMsg());
                        
         } catch (Exception ex) {
             Logger.getLogger(ServiceLuma.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return ejb.getListaPagination(first,pageSize, filters,user );
+        return t1;
     }
 
     @Override
