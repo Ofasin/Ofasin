@@ -12,6 +12,8 @@ import com.ofasin.os.ebanking.model.DominioResguardo;
 import com.ofasin.os.ebanking.model.DominioAsociacion;
 import com.ofasin.procesos.entities.Asociacion;
 import com.ofasin.procesos.entities.Resguardo;
+import com.ofasin.procesos.entities.Wayuu;
+import com.ofasin.procesos.entities.Users;
 import com.ofasin.os.ebanking.model.DominioUsers;
 
 import java.util.ArrayList;
@@ -23,9 +25,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 
 /**
  *
@@ -40,6 +46,7 @@ public class SessionBeanLuma implements LumaIface{
     public List<DominioLuma> getAll() throws Exception {
        List<Luma> entityLuma = new ArrayList<>();
         List<DominioLuma> listaDominio = new ArrayList<>();
+        
         try {
                 Session session = em.unwrap(Session.class);
                 Criteria criteria = session.createCriteria(com.ofasin.procesos.entities.Luma.class);
@@ -84,13 +91,14 @@ public class SessionBeanLuma implements LumaIface{
     }
 
     @Override
-    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters, DominioUsers user) {
+    public List<DominioLuma> getListaPagination(int first, int pageSize, Map<String, Object> filters, DominioLuma obj1) {
         List<Luma> entityLuma = new ArrayList<>();
         List<DominioLuma> listaDominio = new ArrayList<>();
         
         try {
             Session session = this.em.unwrap(Session.class);
             Criteria criteria;
+            
             criteria = session.createCriteria(com.ofasin.procesos.entities.Luma.class);
             criteria.setFirstResult(first)
             .setMaxResults(pageSize);
@@ -105,7 +113,7 @@ public class SessionBeanLuma implements LumaIface{
                     Map.Entry e = (Map.Entry) it.next();
                     key = (String) e.getKey();
                     vlr = (String) e.getValue();
-                   /* if(  key.equalsIgnoreCase("idasociacion") || !key.equalsIgnoreCase("idresguardo")){
+                    if(  key.equalsIgnoreCase("idasociacion") || !key.equalsIgnoreCase("idresguardo")){
                     if (key.equalsIgnoreCase("idresguardo")) {
                             criteria.createAlias("idresguardo", "resg")
                                     .add( Restrictions.eq("resg.idresguardo", vlr) );
@@ -116,26 +124,29 @@ public class SessionBeanLuma implements LumaIface{
                         }
                     
                     } else {
-                    
-                    }*/
-                                if (vlr instanceof String) {
+                    if (vlr instanceof String) {
                                     criteria.add(Restrictions.ilike(key, vlr, MatchMode.ANYWHERE));
                                 } else {
                                     criteria.add(Restrictions.eq(key, vlr));
                                 }
+                    }
+                                
                                 
                 } 
             }
-          /*  if(user!=null){
-             if(!user.getIdroll().getNombre().equalsIgnoreCase("ROLE_ADMIN") || !user.getIdroll().getNombre().equalsIgnoreCase("ROLE_USER")){
-                
-            criteria.createAlias("wayuuList", "wayuu")
-            .createAlias("wayuu.usersList", "user")
-            .add( Restrictions.eq("user.iduser", user.getIduser() ));
-            
-            }
-            }*/
            
+             /*
+             if(!obj1.getUser().getIdroll().getNombre().equalsIgnoreCase("ROLE_USER") || !obj1.getUser().getIdroll().getNombre().equalsIgnoreCase("ROLE_ADMIN"))
+                    {
+            DetachedCriteria subQuery = DetachedCriteria.forClass(Wayuu.class, "wayuu")
+            .add(Restrictions.eq("wayuu.idwayuu", obj1.getUser().getIdusuario().getIdwayuu()))
+            .createCriteria("wayuu.luma" , "luma")
+            .setProjection(Projections.property("luma.idluma"));
+            //criteria.add(Restrictions.eq("idluma", subQuery));
+            criteria.add(Property.forName("idluma").eq(subQuery));
+            
+            }*/
+        
             criteria.addOrder(Order.asc("idluma"));
             
             
@@ -172,6 +183,8 @@ public class SessionBeanLuma implements LumaIface{
                     dominio.setIdasociacion(asociacion);
                     dominio.setCont(cont++);
                     dominio.setStatus(true);
+                    
+                   
                     listaDominio.add(dominio);
                     }
                 }
