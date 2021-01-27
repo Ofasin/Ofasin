@@ -138,19 +138,30 @@ public class SessionBeanLuma implements LumaIface{
              /*
              if(!obj1.getUser().getIdroll().getNombre().equalsIgnoreCase("ROLE_USER") || !obj1.getUser().getIdroll().getNombre().equalsIgnoreCase("ROLE_ADMIN"))
                     {
-            DetachedCriteria subQuery = DetachedCriteria.forClass(Wayuu.class, "wayuu")
-            .add(Restrictions.eq("wayuu.idwayuu", obj1.getUser().getIdusuario().getIdwayuu()))
-            .createCriteria("wayuu.luma" , "luma")
-            .setProjection(Projections.property("luma.idluma"));
-            //criteria.add(Restrictions.eq("idluma", subQuery));
-            criteria.add(Property.forName("idluma").eq(subQuery));
+            
             
             }*/
         
             criteria.addOrder(Order.asc("idluma"));
             
             
-             entityLuma=criteria.list();
+             switch(obj1.getUser().getIdroll().getNombre())
+        {
+            case "ROLE_ADMIN":
+            case "ROLE_USER":
+                entityLuma=criteria.list();
+                break;
+            
+            default:
+                DetachedCriteria subQuery = DetachedCriteria.forClass(Wayuu.class, "wayuu")
+            .add(Restrictions.eq("wayuu.idwayuu", obj1.getUser().getIdusuario().getIdwayuu()))
+            .createCriteria("wayuu.luma" , "luma")
+            .setProjection(Projections.property("luma.idluma"));
+            criteria.add(Property.forName("idluma").eq(subQuery));
+            entityLuma=criteria.list();
+        }
+            
+            
         
             int cont = first+1;
             int pos = 0;
