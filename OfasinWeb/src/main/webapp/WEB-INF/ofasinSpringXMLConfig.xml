@@ -17,8 +17,8 @@
       <access-denied-handler error-page="/content/AccesoNegado.faces"/>
         
         <intercept-url pattern="/content/AccesoNegado.faces" access="IS_AUTHENTICATED_FULLY"/>
-        <intercept-url pattern="/content/welcome.faces" access="ROLE_USER, ROLE_ADMIN"/> 
-        <intercept-url pattern="/content/**" access="ROLE_ALUMNO, ROLE_VIP, ROLE_ADMIN"/>
+        
+        <intercept-url pattern="/content/**" access="ROLE_AUT, ROLE_LIDER, ROLE_CONTRATISTA, ROLE_WAYUU, ROLE_ADMIN"/>
         
         <form-login 
             login-page="/Login.faces"

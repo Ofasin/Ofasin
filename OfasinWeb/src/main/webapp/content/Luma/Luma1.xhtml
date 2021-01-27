@@ -31,15 +31,14 @@
             <div class="ui-fluid" style="margin-top: 10px">
 
                 <p:panelGrid columns="3" layout="grid" 
-                             columnClasses="ui-grid-col-2, ui-grid-col-3, ui-grid-col-7"
-                             styleClass="panelgrid-noborder">
+                             columnClasses="ui-grid-col-2, ui-grid-col-3, ui-grid-col-7">
 
-                    <p:outputLabel value="Comunidad" for="comunidad" />
-                    <p:inputText id="comunidad"
+                    <p:outputLabel value="Comunidad" for="comunidadFil" />
+                    <p:inputText id="comunidadFil"
                                  value="#{clientesManager.clienteEdicao.celular}" />
                     <p:outputLabel value="" />
-                     <p:outputLabel value="Resguardo" for="cmbResguardo" />
-                                <p:selectOneMenu id="cmbResguardo" value="#{beanLuma.luma.idresguardo.idresguardo}" >
+                     <p:outputLabel value="Resguardo" for="cmbFilResguardo" />
+                                <p:selectOneMenu id="cmbFilResguardo" value="#{beanLuma.luma.idresguardo.idresguardo}" >
                                     <f:selectItem itemLabel="Seleccione una opción"  itemValue="" />
                                     <f:selectItems value="#{beanLuma.listaResguardo}"
                                                    var="opcion" itemLabel="#{opcion.descrip}"
@@ -47,8 +46,8 @@
                                     
                                 </p:selectOneMenu>
                         <p:outputLabel value="" />         
-                    <p:outputLabel value="Asociacion" for="cmbAsociacion" />
-                    <p:selectOneMenu id="cmbAsociacion" value="#{beanLuma.luma.idasociacion.idasocicion}" >
+                    <p:outputLabel value="Asociacion" for="cmbFilAsociacion" />
+                    <p:selectOneMenu id="cmbFilAsociacion" value="#{beanLuma.luma.idasociacion.idasocicion}" >
                         <f:selectItem itemLabel="Seleccione una opción"  itemValue="" />
                         <f:selectItems value="#{beanLuma.listaAsociacon}"
                                        var="asoccn" itemLabel="#{asoccn.nombre}"
